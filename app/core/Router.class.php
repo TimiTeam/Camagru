@@ -34,9 +34,10 @@ class Router {
             $path = 'app\controllers\\'.ucfirst($this->params['controller'].'Controller');
             if (class_exists($path)){
                 $action = $this->params['action'].'Action';
+                
                 if (method_exists($path, $action)){
                     echo "<p align=center>Functions found: <b>".$action."</p>";
-                    $controller = new $path;
+                    $controller = new $path($this->params);
                     $controller->$action();
                 }
                 else{

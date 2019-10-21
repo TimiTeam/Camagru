@@ -12,5 +12,9 @@ return [
 	'camagru' => [
 		'controller' => 'main',
 		'action' => 'index'
+	],
+	'camagru/news/show' => [
+		'controller' => 'news',
+		'action' => 'show'
 	]
 ];
