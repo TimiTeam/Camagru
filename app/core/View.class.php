@@ -12,12 +12,24 @@ class View{
     }
     public function render($title, $vars = []){
         if (file_exists('app/views/'.$this->path.'.php')){
+            extract($vars);
             ob_start();
             require 'app/views/'.$this->path.'.php';
             $content = ob_get_clean();
             require 'app/views/layout/'.$this->layout.'.php';
         }
-        else
-            echo 'View not found';
+    }
+
+    public static function errorCode($code){
+        http_response_code($code);
+        if (file_exists('app/views/errors/'.$code.'.php')){
+            require 'app/views/errors/'.$code.'.php';
+            exit;
+        }
+    }
+
+    public function redirect($url){
+        header('location: '.$url);
+        exit;
     }
 }

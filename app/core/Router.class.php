@@ -2,6 +2,8 @@
 
 namespace app\core;
 
+use app\core\View;
+
 class Router {
 
     protected $routs = [];
@@ -10,7 +12,7 @@ class Router {
     function __construct(){
         $arr = require'app/config/routes.php';
         foreach ($arr as $key => $val)
-            $this->add($key, $val);
+            $this->add($key, $val); 
     }
     public function add($route, $params){
         $route = '#^'.$route.'$#';
@@ -39,12 +41,14 @@ class Router {
                     $controller->$action();
                 }
                 else{
-                    echo "<p align=center>Not found functions: <b>".$action."</p>";
+                    View::errorCode(404);
                 }
             }
             else {
-                echo "<p align=center>Class not fount <b>".$path.".class.php</p>";
+                    View::errorCode(404);
             }
         }
+        else
+            View::errorCode(404);
     }
 }
