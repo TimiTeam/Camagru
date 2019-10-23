@@ -9,7 +9,6 @@ class Router {
 
     function __construct(){
         $arr = require'app/config/routes.php';
-        echo "<h2 align=center>It's ME</h2>";
         foreach ($arr as $key => $val)
             $this->add($key, $val);
     }
@@ -36,7 +35,6 @@ class Router {
                 $action = $this->params['action'].'Action';
                 
                 if (method_exists($path, $action)){
-                    echo "<p align=center>Functions found: <b>".$action."</p>";
                     $controller = new $path($this->params);
                     $controller->$action();
                 }

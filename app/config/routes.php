@@ -5,7 +5,7 @@ return [
 		'controller' => 'account',
 		'action' => 'login'
 	],
-	'camagru/register/login' => [
+	'camagru/account/register' => [
 		'controller' => 'account',
 		'action' => 'register'
 	],
@@ -18,3 +18,4 @@ return [
 		'action' => 'show'
 	]
 ];
+ 

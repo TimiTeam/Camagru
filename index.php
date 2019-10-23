@@ -12,5 +12,4 @@ spl_autoload_register(function ($class) {
 session_start();
 
 $var = new Router;
-	echo "<h1>Hello PHP</h1>";
 $var->run();
