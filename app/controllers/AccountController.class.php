@@ -27,9 +27,11 @@ class AccountController extends Controller{
         if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             if ($this->validate_form() && $this->isRegisterUser())
-                echo '<p><b>Welcome '.$_POST['login'].'</b></p>';
+                {
+                    header('Location: http://localhost:8080/camagru/');
+                    exit;
+                }
             else
-        
             {
                 $this->view->path = 'account/login';
                 $this->loginAction();
