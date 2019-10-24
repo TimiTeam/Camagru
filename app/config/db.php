@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'host' => 'e1r7p15.unit.ua',
-    'dbname' => 'db_tbujalo',
+    'host' => '127.0.0.1',
+    'dbname' => 'camagru',
     'user' => 'root',
-    'pass' => 'timati_super_star221296U'
+    'pass' => '2212'
 ];

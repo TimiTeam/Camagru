@@ -9,6 +9,10 @@ return [
 		'controller' => 'account',
 		'action' => 'register'
 	],
+	'camagru/account/check?' => [
+		'controller' => 'account',
+		'action' => 'check'
+	],
 	'camagru' => [
 		'controller' => 'main',
 		'action' => 'index'

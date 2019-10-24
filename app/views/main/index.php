@@ -1,6 +1,6 @@
 
     <p> Welcome </p>
-    <p>name: <b><?php echo $name ?> </b></p>
-    <p>age: <b><?php echo $age ?> </b></p>
+    <p>name: <b><?php echo $first_name ?> </b></p>
+    <p>email: <b><?php echo $email ?> </b></p>
 </body>
 </html>

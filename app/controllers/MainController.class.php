@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use app\core\Controller;
-use app\lib\Db;
 
 class MainController extends Controller{
 
     public function indexAction(){
-        $db = new Db;
-        $vars = [
-            'name' => 'Tim',
-            'age' => '22'
-        ];
-        $this->view->render("Main", $vars);
+        echo '<p> In main page</p>';
+        $res = $this->model->getNews();
+       // m_debug( $res);
+       foreach ($res as $key) {
+            $this->view->render("index", $key);
+       }
     }
+
 }
