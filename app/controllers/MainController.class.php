@@ -7,12 +7,6 @@ use app\core\Controller;
 class MainController extends Controller{
 
     public function indexAction(){
-        echo '<p> In main page</p>';
-        $res = $this->model->getNews();
-       // m_debug( $res);
-       foreach ($res as $key) {
-            $this->view->render("index", $key);
-       }
+        $this->view->render("index", array('first_name' => 'TimurBoss', 'email' => 'boss_timur@gmail.com'));
     }
-
 }

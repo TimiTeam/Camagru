@@ -7,5 +7,13 @@
         <title><?php echo $title?></title>
     </head>
     <body>
+    <header>
+    <ul class="hr">
+        <a href="http://localhost:8080/camagru/"><li>Main Page </li></a>
+        <li>See all photos</li>
+        <li>MyAccount</li>
+        <a href="http://localhost:8080/camagru/account/<?php if (isset($_SESSION['user_in'])) echo 'logout"><li>Logout</li>'; else  echo 'login"><li>Login</li>'; ?></a>
+    </ul>
+    </header>
         <?php echo $content; 
         ?>

@@ -13,6 +13,10 @@ return [
 		'controller' => 'account',
 		'action' => 'makePhoto'
 	],
+	'camagru/account/logout' => [
+		'controller' => 'account',
+		'action' => 'logout'
+	],
 	'camagru' => [
 		'controller' => 'main',
 		'action' => 'index'
