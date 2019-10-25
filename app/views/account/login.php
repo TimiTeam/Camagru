@@ -1,6 +1,7 @@
 
     <h3>Enter your <b>login </b> and <b>password </b><h3>
-    <form action="check" method="POST">
+    <p style="color:red;"><?php if (isset($message)) echo $message ?></p>
+    <form action="" method="POST">
         <p>Login</p>
         <p><input type="text" name="login" placeholder="LOGIN"></p>
         <p>Password</p>

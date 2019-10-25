@@ -7,6 +7,17 @@ use app\core\Controller;
 class AccountController extends Controller{
 
     public function loginAction($param = []){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            if ($this->validate_form()){
+                if ($this->isRegisterUser()){
+                    echo 'Good';
+                }
+                else
+                    $param = array('message' => 'Invalid login/password');
+            }
+            else
+                $param['message'] = 'Fill the fields';
+        }
         $this->view->layout = 'custom';
         $this->view->render("Login", $param);
     }
@@ -23,26 +34,6 @@ class AccountController extends Controller{
         return true;
     }
 
-    public function checkAction(){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST')
-        {
-            if ($this->validate_form() && $this->isRegisterUser())
-                {
-                    header('Location: http://localhost:8080/camagru/');
-                    exit;
-                }
-            else
-            {
-                $this->view->path = 'account/login';
-                $this->loginAction();
-            }
-        }
-        else
-        {
-            $this->view->path = 'account/login';
-            $this->loginAction();
-        }
-    }
     private function validate_form() {
         if (!isset($_POST['login']) || strlen($_POST['login']) < 3 || !isset($_POST['pass']) || strlen($_POST['pass']) < 2)
             return false;
