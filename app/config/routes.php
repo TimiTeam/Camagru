@@ -9,9 +9,9 @@ return [
 		'controller' => 'account',
 		'action' => 'register'
 	],
-	'camagru/account/check?' => [
+	'camagru/account/makePhoto' => [
 		'controller' => 'account',
-		'action' => 'check'
+		'action' => 'makePhoto'
 	],
 	'camagru' => [
 		'controller' => 'main',
