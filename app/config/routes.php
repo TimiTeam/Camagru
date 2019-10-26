@@ -17,12 +17,16 @@ return [
 		'controller' => 'account',
 		'action' => 'logout'
 	],
+	'camagru/account/setting' => [
+		'controller' => 'account',
+		'action' => 'setting'
+	],
 	'camagru' => [
 		'controller' => 'main',
 		'action' => 'index'
 	],
-	'camagru/news/show' => [
-		'controller' => 'news',
+	'camagru/gallery/show' => [
+		'controller' => 'gallery',
 		'action' => 'show'
 	]
 ];

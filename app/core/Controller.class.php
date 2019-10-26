@@ -19,7 +19,5 @@ abstract class Controller{
         $pth = 'app\models\\'.ucfirst($name);
         if (class_exists($pth))
             return new $pth;
-        else
-            m_debug($pth);
     }
 } 

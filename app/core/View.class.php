@@ -10,9 +10,9 @@ class View{
         $this->route = $route;
         $this->path = $this->route['controller'].'/'.$this->route['action'];
     }
-    public function render($title, $vars = []){
+    public function render($title, $param = []){
         if (file_exists('app/views/'.$this->path.'.php')){
-            extract($vars);
+            extract($param);
             ob_start();
             require 'app/views/'.$this->path.'.php';
             $content = ob_get_clean();
