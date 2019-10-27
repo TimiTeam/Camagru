@@ -1,8 +1,14 @@
 <?php
-    if (!isset($_SESSION['user_in']))
-        header("Location: http://localhost:8080/camagru/");
-    $json = json_encode($param);
-    $changed = $param;
+if (!isset($_SESSION['user_in']))
+	header("Location: http://localhost:8080/camagru/");
+if ($notify == 0)
+	$notify_input  = '<input type="radio" name="notify" value="1"> Activate
+    <input type="radio" name="notify" value="0" checked> Deactivate';
+else
+	$notify_input  = '<input type="radio" name="notify" value="1" checked> Activate
+    <input type="radio" name="notify" value="0"> Deactivate';
+$json = json_encode($param);
+$changed = $param;
 ?>
 <h2>Welcome <?php echo $login ?> </h2>
 <form action="" method="POST">
@@ -23,8 +29,7 @@
     <input type="button" name="new_login" value="Edit" onclick="editElement(this, 'login');">
     </p>
     <p>Notify me by email about commenting on my post</p>
-    <input type="radio" name="notify" value="1" checked> Activate
-    <input type="radio" name="notify" value="0"> Deactivate
+	<?php echo $notify_input ?>
     <button>Save</button>
 </form>
 
