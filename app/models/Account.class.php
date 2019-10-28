@@ -61,7 +61,8 @@ class Account extends Model{
             'last_name' => htmlentities($_POST['last_name']),
             'email' => htmlentities($_POST['email']),
             'login' => htmlentities($_POST['login']),
-            'notify' => htmlentities($_POST['notify']));
+            'notify' => htmlentities($_POST['notify']),
+            'password' => htmlentities($_POST['password']));
         $vars = array_diff($vars, array('', NULL, false));
         if (isset($vars['email']) && !filter_var($vars['email'], FILTER_VALIDATE_EMAIL))
             $errors[] = "Wrong email format";
@@ -71,6 +72,8 @@ class Account extends Model{
             foreach ($vars as $k => $v){
                 $new_data[$k] = $v;
             }
+            if (isset($vars['password']))
+                $new_data['password'] = password_hash($vars['password'], PASSWORD_DEFAULT);
             $res = $this->db->row("UPDATE `users` SET `first_name` = :first_name, `last_name` = :last_name, 
             `email` = :email, `login` = :login, `password` =:password, `notify` = :notify WHERE id = ".$user['id']." ;" , $new_data);
             header("Location: http://localhost:8080/camagru/account/setting");
@@ -78,7 +81,7 @@ class Account extends Model{
         }
     }
 
-    private function isNewLogin($login){
+    public function isNewLogin($login){
         $res = $this->db->column("SELECT `id` FROM `users` WHERE `login` = :logi", array('logi' => $login));
         if ($res)
             return false;
@@ -91,7 +94,7 @@ class Account extends Model{
         return $res;
     }
 
-    private function isRegisterUser($login, $pass){
+    public function isRegisterUser($login, $pass){
         $res = $this->db->column("SELECT `password` FROM `users` WHERE `login` = :logi;",
             array('logi' => $login));
         if (password_verify($pass, $res))
@@ -110,8 +113,8 @@ class Account extends Model{
         $errors = [];
 
         foreach ($vars as $k => $v){
-            if (strlen($v) < 1)
-                $errors[] = "Empty field ".$k;
+            if (strlen($v) < 2)
+                $errors[] = $k." - to short";
         }
         return ($errors);
     }

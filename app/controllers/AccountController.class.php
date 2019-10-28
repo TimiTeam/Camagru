@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\core\Controller;
 
+
 class AccountController extends Controller{
 
     public function loginAction($param = []){
@@ -36,5 +37,25 @@ class AccountController extends Controller{
             $param = $this->model->changeUserData($user);
         }
         $this->view->render($user['login']."Account", $user);
+    }
+    public function validLoginAction(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $login = htmlspecialchars(trim($_POST["login"]));
+            if (isset($login) && $this->model->isNewLogin($login))
+                echo 'ok';
+            else
+                echo 'login exist';
+        }
+    }
+
+    public function validPasswordAction(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $login = $_SESSION['user_login'];
+            $pass = htmlspecialchars(trim($_POST["curr_pass"]));
+            if ($this->model->isRegisterUser($login, $pass))
+                echo 'ok';
+            else
+                echo $$login;
+        }
     }
 }

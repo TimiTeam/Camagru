@@ -1,26 +1,3 @@
-
-    <h2>Welcom in registration</h2>
-    <h3>Input your <u> first name, lase name, e-maill, login </u> and <u>password </u></h3>
-    <?php if (isset($errors_message)) foreach ($errors_message as $message) echo '<p  style="color:red;">'.$message.'</p>'; ?>
-    <form action="" method="POST">
-        <p id="error" style="color:red;"></p>
-        <p>First name<br>
-        <input type="text" name="first_name" required onchange="inputValidation(this);"></p>
-        <p>Last name<br>
-        <input type="text" name="last_name" required onchange="inputValidation(this);"></p>
-        <p>E-maill <br>
-        <input type="email" name="email" size="50" required onchange="emailValidation(this);">
-        <p>Login<br>
-        <input type="text" name="login" onchange="loginValidation(this);"></p> 
-        <p>Password<br>
-        <input id="pass" type="password" required name="pass" onchange="inputValidation(this);"></p>
-        <p>Confirm password<br>
-        <input id="confirm" type="password" required name="confirm" onchange="inputValidation(this);"></p>
-        <p><button>Register</button></p>
-    </form>
-
-<script>
-
 function    setErrorText(text){
     document.getElementById("error").textContent = text;
 }
@@ -47,7 +24,7 @@ function    loginValidation(elem){
                 elem.value = "";
             }
             else
-                setErrorText("");    
+                setErrorText("");          
             inputValidation(elem);
         }
     };
@@ -70,6 +47,3 @@ function    emailValidation(element){
         setErrorText("");
     }
 }
-</script>
-</body>
-</html>
