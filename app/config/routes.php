@@ -25,7 +25,12 @@ return [
 		'controller' => 'account',
 		'action' => 'validLogin'
 	],
-	
+
+	'camagru/account/status' => [
+		'controller' => 'account',
+		'action' => 'status'
+	],
+
 	'camagru/account/validPassword' => [
 		'controller' => 'account',
 		'action' => 'validPassword'

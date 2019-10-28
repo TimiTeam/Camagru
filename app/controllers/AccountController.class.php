@@ -58,4 +58,18 @@ class AccountController extends Controller{
                 echo $$login;
         }
     }
+
+    public function statusAction($param = []){
+        if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['token']) && isset($_GET['email'])){
+            $token = $_GET['token'];
+            $email = $_GET['email'];
+            if ($this->model->confirmEmail($token, $email))
+                $param['info'] = "Success, yor Email confirm";
+            else
+                $param['info'] = "Sorry some trouble, please try again";
+        }
+        else
+            $param['info'] = 'Check your email';
+        $this->view->render("Confirm email", $param);
+    }
 }

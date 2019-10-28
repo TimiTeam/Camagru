@@ -26,6 +26,17 @@ class Account extends Model{
         return ($param);
     }
 
+    private function generate_string($strength = 16) {
+        $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $input_length = strlen($permitted_chars);
+        $random_string = '';
+        for($i = 0; $i < $strength; $i++) {
+            $random_character = $permitted_chars[mt_rand(0, $input_length - 1)];
+            $random_string .= $random_character;
+        }
+        return $random_string;
+    }
+
     public function register(){
         $vars = array ('first_name' => htmlentities($_POST['first_name']),
             'last_name' => htmlentities($_POST['last_name']),
@@ -40,13 +51,14 @@ class Account extends Model{
             $errors[] = "Passwords don't match";
         unset($vars['confirm']);
         $vars['password'] = password_hash($vars['password'], PASSWORD_DEFAULT);
+        $vars['token'] = $this->generate_string(30);
+        $this->sendMail($vars);
         if (!isset($errors[0])){
             if ($this->isNewLogin($vars['login'])){
                 $res = $this->addNewUser($vars);
-                $_SESSION['user_in'] = true;
                 $_SESSION['user_login'] = $vars['login'];
                 $_SESSION['user_id'] = $this->db->column("SELECT `id` FROM `users` WHERE `login` = :logi", array('logi' => $vars['login']));
-                header("Location: http://localhost:8080/camagru/account/makePhoto");
+                header("Location: http://localhost:8080/camagru/account/status");
                 exit;
             }
             else{
@@ -89,8 +101,8 @@ class Account extends Model{
     }
 
     private function addNewUser($vars){
-        $res = $this->db->column('INSERT INTO `users` (`first_name`, `last_name`, `email`, `login`, `password`)
-        VALUES (:first_name, :last_name, :email, :login, :password);', $vars);
+        $res = $this->db->column('INSERT INTO `users` (`first_name`, `last_name`, `email`, `login`, `password`, `token`)
+        VALUES (:first_name, :last_name, :email, :login, :password, :token);', $vars);
         return $res;
     }
 
@@ -119,9 +131,35 @@ class Account extends Model{
         return ($errors);
     }
 
+    private function sendMail($user){
+        $to      = $user['email'];
+        $subject = 'Registration';
+        $message = 'Hey, you confirm registration on camagru at '.date("d.m.Y", time()).' by user: '.$user['login'].' Go to the link
+        <a href="http://localhost:8080/camagru/account/status?token='.$user['token'].'&email='.$to .'">'.'http://localhost:8080/camagru/account/status?token='.$user['token'].'</a>';
+        $headers  = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+       /* $headers = array(
+            'From' => 'webmaster@example.com',
+            'Reply-To' => 'webmaster@example.com',
+            'X-Mailer' => 'PHP/' . phpversion()
+        );
+*/        mail($to, $subject, $message, $headers);
+    }
+
     public function getCurrentUser($id){
         $res = $this->db->row("SELECT * FROM `users` WHERE `id` = :id",
                 array('id' => $id));
         return $res[0];
+    }
+
+    public function confirmEmail($token, $email){
+        $user = $this->getCurrentUser($_SESSION['user_id']);
+        if ($user['token'] == $token && $email == $user['email'])
+        {
+            $_SESSION['user_in'] = true;
+            $res = $this->db->row("UPDATE `users` SET `token` = :token, `verified` = :verified WHERE id = ".$user['id']." ;", array('token' =>  "", 'verified' => "1" ));
+            return (true);
+        }
+        return false;
     }
 }
