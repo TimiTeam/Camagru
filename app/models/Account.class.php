@@ -56,8 +56,9 @@ class Account extends Model{
         if (!isset($errors[0])){
             if ($this->isNewLogin($vars['login'])){
                 $res = $this->addNewUser($vars);
+                \m_debug($res);
                 $_SESSION['user_login'] = $vars['login'];
-                $_SESSION['user_id'] = $this->db->column("SELECT `id` FROM `users` WHERE `login` = :logi", array('logi' => $vars['login']));
+                $_SESSION['user_id'] = $this->db->column("SELECT `id` FROM `users` WHERE `login` =:login", array('login' => $vars['login']));
                 header("Location: http://localhost:8080/camagru/account/status");
                 exit;
             }
@@ -80,14 +81,15 @@ class Account extends Model{
             $errors[] = "Wrong email format";
         if (!isset($errors[0])){
             $new_data = $user;
-            unset($new_data['id']);
             foreach ($vars as $k => $v){
                 $new_data[$k] = $v;
             }
             if (isset($vars['password']))
                 $new_data['password'] = password_hash($vars['password'], PASSWORD_DEFAULT);
+            unset($new_data['verified']);
+            unset($new_data['token']);
             $res = $this->db->row("UPDATE `users` SET `first_name` = :first_name, `last_name` = :last_name, 
-            `email` = :email, `login` = :login, `password` =:password, `notify` = :notify WHERE id = ".$user['id']." ;" , $new_data);
+            `email` = :email, `login` = :login, `password` =:password, `notify` = :notify WHERE id = :id " , $new_data);
             header("Location: http://localhost:8080/camagru/account/setting");
             exit;
         }
@@ -101,7 +103,7 @@ class Account extends Model{
     }
 
     private function addNewUser($vars){
-        $res = $this->db->column('INSERT INTO `users` (`first_name`, `last_name`, `email`, `login`, `password`, `token`)
+        $res = $this->db->row('INSERT INTO `users` (`first_name`, `last_name`, `email`, `login`, `password`, `token`)
         VALUES (:first_name, :last_name, :email, :login, :password, :token);', $vars);
         return $res;
     }
@@ -144,6 +146,32 @@ class Account extends Model{
             'X-Mailer' => 'PHP/' . phpversion()
         );
 */        mail($to, $subject, $message, $headers);
+    }
+
+    public function resetPasswordEmail($email, $login){
+        $to      = $email;
+        $subject = 'Reset password';
+        $_SESSION['reset_token'] = $this->generate_string(10);
+        $message = 'Hey, '.$login.' want to reset password. Go to the link to reset or just ignore is.
+        <a href="http://localhost:8080/camagru/account/reset?reset_token='.$_SESSION['reset_token'].'&email='.$to .'">'.'http://localhost:8080/camagru/account/reset?reset_token='.$_SESSION['reset_token'].'</a>';
+        $headers  = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+        mail($to, $subject, $message, $headers);
+    }
+
+    public function confirmEmailAndLogin($email, $login){
+        $res = $this->db->row("SELECT * FROM `users` WHERE `login` = :logi", array('logi' => $login));
+        if ($res[0]['email'] == $email){
+            $_SESSION['user_id'] = $res[0]['id'];
+            return true;
+        }
+        return false;
+    }
+
+    public function updatePassword($newPassord){
+        $newPassord = password_hash($newPassord, PASSWORD_DEFAULT);
+        $id = $_SESSION['user_id'];
+        $res = $this->db->row("UPDATE `users` SET `password` =:password WHERE id = :id ;" , array('password' => $newPassord, 'id' => $id));
     }
 
     public function getCurrentUser($id){

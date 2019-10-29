@@ -42,6 +42,7 @@ function    loginValidation(elem){
     request.open("POST", "validLogin");
     request.onreadystatechange = function() {
         if(this.readyState === 4 && this.status === 200) {
+            console.log(this.responseText);
             if (this.responseText != "ok"){
                 setErrorText(elem.value+" Login exist");
                 elem.value = "";
@@ -49,6 +50,7 @@ function    loginValidation(elem){
             else
                 setErrorText("");    
             inputValidation(elem);
+            
         }
     };
     var formData = new FormData();

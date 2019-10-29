@@ -38,6 +38,7 @@ class AccountController extends Controller{
         }
         $this->view->render($user['login']."Account", $user);
     }
+    
     public function validLoginAction(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             $login = htmlspecialchars(trim($_POST["login"]));
@@ -57,6 +58,47 @@ class AccountController extends Controller{
             else
                 echo $$login;
         }
+    }
+
+    public function resetAction($param = []){
+        $input = '<p> Login <br>
+        <input type="text" name="login" required>
+    </p>
+    <p> Email <br>
+        <input type="email" name="email" required>
+    </p>
+    <p>';
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email']) && isset($_POST['login'])){
+            if (($email = htmlentities($_POST['email'])) && ($login = htmlentities($_POST['login']))){
+                if ($this->model->confirmEmailAndLogin($email, $login)){
+                    $this->model->resetPasswordEmail($email, $login);
+                    header("Location: http://localhost:8080/camagru/account/status");
+                    exit;
+                }
+                else
+                    $param['error'] = "This email not belong to ".$login;
+            }
+            else
+                $param['error'] = "Input error, try again";
+        }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['password']) && isset($_POST['confirm']) && $_POST['confirm'] == $_POST['password']){
+            $pass = htmlspecialchars(trim($_POST['password']));
+            $this->model->updatePassword($pass);
+            header("Location: http://localhost:8080/camagru/account/login");
+            exit;
+        }
+        if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['reset_token']) && isset($_GET['email']) && $_GET['reset_token'] == $_SESSION['reset_token']){
+            unset($_SESSION['reset_token']);
+            $input = '<p> New password <br>
+        <input type="password" name="password" required>
+    </p>
+    <p> Confirm  <br>
+        <input type="password" name="confirm" required>
+    </p>
+    <p>';
+        }
+        $param['data'] = $input;
+        $this->view->render("Reset", $param);
     }
 
     public function statusAction($param = []){

@@ -25,7 +25,10 @@ return [
 		'controller' => 'account',
 		'action' => 'validLogin'
 	],
-
+	'camagru/account/reset' => [
+		'controller' => 'account',
+		'action' => 'reset'
+	],
 	'camagru/account/status' => [
 		'controller' => 'account',
 		'action' => 'status'
