@@ -24,6 +24,7 @@ class AccountController extends Controller{
     public function makePhotoAction($param = []){
         $this->view->render("MakePhoto", $param);
     }
+    
     public function logoutAction($param = []){
         session_unset ();
         header("Location: http://localhost:8080/camagru/");
