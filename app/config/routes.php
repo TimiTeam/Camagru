@@ -33,7 +33,10 @@ return [
 		'controller' => 'account',
 		'action' => 'status'
 	],
-
+	'camagru/account/postPhoto' => [
+		'controller' => 'account',
+		'action' => 'postPhoto'
+	],
 	'camagru/account/validPassword' => [
 		'controller' => 'account',
 		'action' => 'validPassword'

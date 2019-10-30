@@ -5,6 +5,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <style>
+        div.cont{
+            display: inline-flex;
+            border: 2px dashed blue;
+        }
+        div.first{
+            display: inline-block;
+        }
+
+        div.second{
+            height: 600px;
+            overflow-y:scroll;
+        }
         video{
             border: 1px solid #ddd;
             border-radius: 2%;
@@ -14,8 +26,8 @@
             border: 1px solid #ddd;
             border-radius: 10%;
             padding: 5px;
-            width: 128px;
-            height: 96px;
+            width: 160px;
+            height: 120px;
         }
 
         img.render:hover {

@@ -135,9 +135,7 @@ class Account extends Model{
     }
 
     public function makeImage(){
-        $data = htmlspecialchars($_POST['img']);
-
-        //$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $img));
+        $data = htmlspecialchars($_POST['posted_image']);
         if (preg_match('/^data:image\/(\w+);base64,/', $data, $type)) {
             $data = substr($data, strpos($data, ',') + 1);
             $type = strtolower($type[1]); // jpg, png, gif
@@ -145,9 +143,7 @@ class Account extends Model{
             if (!in_array($type, [ 'jpg', 'jpeg', 'gif', 'png' ])) {
                 throw new \Exception('invalid image type');
             }
-        
             $data = base64_decode($data);
-        
             if ($data === false) {
                 throw new \Exception('base64_decode failed');
             }
@@ -155,12 +151,14 @@ class Account extends Model{
             throw new \Exception('did not match data URI with image data');
         }
         $user = $_SESSION['user_login'];
-        $count = $_POST['count'];
-        $fileName = "img_{$user}_{$count}.{$type}";
-        $id = $user.$count;
+        $date = date("H:i:s_m.d.y");
+        $user_id = $_SESSION['user_id'];
+        $title = htmlentities($_POST['title']);
+        $fileName = "users_photo/img_{$user}_{$date}.{$type}";
         file_put_contents($fileName, $data);
-        echo $fileName;
-        //echo '<img src="'.$fileName.'" id="'.$id.'" alt="alt">';
+        $res = $this->db->row('INSERT INTO `posts` (`user_id`, `published`, `title`, `path_photo`)
+        VALUES (:usr_id, :published, :title, :path_photo);', array('usr_id' => $user_id, 'published' => date("Y-m-d H:i:s"), 'title' => $title, 'path_photo' => $fileName));
+        return (true);
     }
 
     private function sendMail($user){

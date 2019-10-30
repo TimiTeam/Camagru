@@ -22,11 +22,15 @@ class AccountController extends Controller{
     }
 
     public function makePhotoAction($param = []){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $this->model->makeImage();
-            exit;
-        }
         $this->view->render("MakePhoto", $param);
+    }
+
+    public function postPhotoAction($param = []){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['posted_image'])){
+            if ($this->model->makeImage())
+                echo 'http://localhost:8080/camagru/gallery/show';
+        }
+        return 'error';
     }
     
     public function logoutAction($param = []){
