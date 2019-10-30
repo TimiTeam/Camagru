@@ -22,6 +22,10 @@ class AccountController extends Controller{
     }
 
     public function makePhotoAction($param = []){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $this->model->makeImage();
+            exit;
+        }
         $this->view->render("MakePhoto", $param);
     }
     

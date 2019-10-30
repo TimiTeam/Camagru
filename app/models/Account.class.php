@@ -90,6 +90,7 @@ class Account extends Model{
             unset($new_data['token']);
             $res = $this->db->row("UPDATE `users` SET `first_name` = :first_name, `last_name` = :last_name, 
             `email` = :email, `login` = :login, `password` =:password, `notify` = :notify WHERE id = :id " , $new_data);
+            $_SESSION['user_login'] = $new_data['login'];
             header("Location: http://localhost:8080/camagru/account/setting");
             exit;
         }
@@ -131,6 +132,35 @@ class Account extends Model{
                 $errors[] = $k." - to short";
         }
         return ($errors);
+    }
+
+    public function makeImage(){
+        $data = htmlspecialchars($_POST['img']);
+
+        //$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $img));
+        if (preg_match('/^data:image\/(\w+);base64,/', $data, $type)) {
+            $data = substr($data, strpos($data, ',') + 1);
+            $type = strtolower($type[1]); // jpg, png, gif
+        
+            if (!in_array($type, [ 'jpg', 'jpeg', 'gif', 'png' ])) {
+                throw new \Exception('invalid image type');
+            }
+        
+            $data = base64_decode($data);
+        
+            if ($data === false) {
+                throw new \Exception('base64_decode failed');
+            }
+        } else {
+            throw new \Exception('did not match data URI with image data');
+        }
+        $user = $_SESSION['user_login'];
+        $count = $_POST['count'];
+        $fileName = "img_{$user}_{$count}.{$type}";
+        $id = $user.$count;
+        file_put_contents($fileName, $data);
+        echo $fileName;
+        //echo '<img src="'.$fileName.'" id="'.$id.'" alt="alt">';
     }
 
     private function sendMail($user){
