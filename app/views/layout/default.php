@@ -6,6 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="/camagru/app/style/makePhoto.css">
         <link rel="stylesheet" href="/camagru/app/style/mainStyle.css">
+        <script src="/camagru/app/scripts/dropMask.js"></script>
         <title><?php echo $title?></title>
     </head>
     <body>

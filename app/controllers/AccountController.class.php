@@ -22,6 +22,7 @@ class AccountController extends Controller{
     }
 
     public function makePhotoAction($param = []){
+        $param['arrayMasks'] = $this->model->getMasks();
         $this->view->render("MakePhoto", $param);
     }
 

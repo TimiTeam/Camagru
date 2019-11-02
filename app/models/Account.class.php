@@ -96,6 +96,13 @@ class Account extends Model{
         }
     }
 
+    public function getMasks(){
+        $mas[] = '/camagru/app/res/cat.png';
+        $mas[] = '/camagru/app/res/anotherCat.png';
+        $mas[] = '/camagru/app/res/mask.png';
+        return $mas;
+    }
+
     public function isNewLogin($login){
         $res = $this->db->column("SELECT `id` FROM `users` WHERE `login` = :logi", array('logi' => $login));
         if ($res)

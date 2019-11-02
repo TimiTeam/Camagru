@@ -27,14 +27,21 @@ if (!isset($_SESSION['user_in']))
     </div>
     <h2>Make your photo here</h2>
     <div class="cont">
-        <div class="masks">
-            <img>
-            <br>
-            <img>
+        <div class="masks" id="masks">
+            <?php 
+                if (isset($arrayMasks)){
+                    for ($i = 0; $i < count($arrayMasks); $i++){
+                        echo '<img draggable="true" onclick="moveMask(this);" class="one_mask" id="mask_'.$i.'" src="'.$arrayMasks[$i].'">';
+                    }
+                }
+            ?>
         </div>
         <div class="video_div">
-            <video id="video" width="640" height="480" autoplay></video>
-            <br>
+            <figure>
+                <video id="video" autoplay>
+
+                </video>
+            </figure>
             <button class="clasic_button" id="snap" onclick="makePhoto();">Make Phto</button>
         </div>
         <div id="photos" class="rendered">
@@ -43,6 +50,49 @@ if (!isset($_SESSION['user_in']))
 </div>
 
 <script>
+
+var drawImg = [];
+
+window.onload = function(){
+  var collection = document.getElementById("masks").childNodes;
+  if (collection){
+    for(var i = 0; i < collection.length; i++){
+      
+    }
+  }
+};
+
+var ele = document.getElementById('mask_'+1);
+if (ele != null){
+  ele.onmousedown = function(e) {
+      var newIm = new Image();
+      newIm.src = ele.src;
+      newIm.style.position = 'absolute';
+      moveAt(e);
+      document.body.appendChild(newIm);
+      function moveAt(e) {
+          newIm.style.left = e.pageX - newIm.offsetWidth / 2 + 'px';
+          newIm.style.top = e.pageY - newIm.offsetHeight / 2 + 'px';
+      }
+      document.onmousemove = function(e) {
+          moveAt(e);
+      }
+      newIm.onmouseup = function() {
+        drawImg.push(newIm);
+        document.onmousemove = null;
+        newIm.onmouseup = null;
+        console.log(newIm);
+      }
+  }
+
+}
+var maskImg = null;
+
+function moveMask(mask){
+    maskImg = mask;
+}
+
+
 var video = document.getElementById('video');
 var i = 0;
 
@@ -56,7 +106,6 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 document.getElementById("post").onclick = function() {
     saveImage();
     document.getElementById("modal").style.display = "none";
-    //dialog.close();
 };
 
 
@@ -73,11 +122,20 @@ function loadImg(elem){
 }
 
 function makePhoto(){
+    if (drawImg.length == 0)
+        return;
     var canvas = document.createElement("canvas");
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
-    canvas.getContext('2d')
-          .drawImage(video, 0, 0, canvas.width, canvas.height);
+    var ctx = canvas.getContext('2d');
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    for (var i = 0; i < drawImg.length; i++){
+        var img = drawImg[i];
+        pos = getCoords(img);
+        console.log(pos.left / canvas.width * document.documentElement.clientWidth);
+        console.log(pos.top / canvas.height * document.documentElement.clientHeight);
+        ctx.drawImage(img, pos.left/ document.documentElement.clientWidth * canvas.width, pos.top/ document.documentElement.clientHeight * canvas.height);
+    }
     var img = new Image(video.videoWidth, video.videoHeight);
     img.setAttribute("id", "img_"+i);
     img.setAttribute("onclick", "loadImg(this);");
@@ -87,6 +145,26 @@ function makePhoto(){
     document.getElementById("img_"+i).insertAdjacentHTML('beforebegin', '<br>');
     i++;
 }
+
+function getCoords(elem) {
+  let box = elem.getBoundingClientRect();
+
+  return {
+    top: box.top + pageYOffset,
+    left: box.left + pageXOffset
+  };
+}
+
+function getOffsetSum(elem) {
+    var top=0, left=0
+    while(elem) {
+          top = top + parseFloat(elem.offsetTop)
+          left = left + parseFloat(elem.offsetLeft)
+          elem = elem.offsetParent       
+  }
+  return {top: Math.round(top), left: Math.round(left)}
+}
+
 
 
 function  saveImage(){
