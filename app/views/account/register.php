@@ -1,4 +1,4 @@
-
+<div class="main_panel">
     <h2>Welcom in registration</h2>
     <h3>Input your <u> first name, lase name, e-maill, login </u> and <u>password </u></h3>
     <?php if (isset($errors_message)) foreach ($errors_message as $message) echo '<p  style="color:red;">'.$message.'</p>'; ?>
@@ -18,7 +18,7 @@
         <input id="confirm" type="password" required name="confirm" onchange="inputValidation(this);"></p>
         <p><button>Register</button></p>
     </form>
-
+</div>
 <script>
 
 function    setErrorText(text){

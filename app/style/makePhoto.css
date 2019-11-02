@@ -1,0 +1,102 @@
+body {
+    height: 100%;
+}
+
+
+@keyframes animate {
+    from {
+    top:-320px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+.main_panel{
+    width: 60%;
+    height: 100%;
+    margin-left: 20%;
+}
+
+div.cont{
+    width: 100%;
+    display: inline-flex;
+    border: 2px dashed blue;
+}
+
+img.cont{
+    max-width: 100%;
+    height: auto;
+}
+
+.masks{
+    padding: 2%;
+    width: 20%;
+}
+
+div.video_div{
+    padding: 2%;
+    text-align: center;
+    display: inline-block;
+}
+
+div.rendered{
+    padding: 2%;
+    width: 20%;
+    height: 600px;
+    overflow-y:scroll;
+}
+
+video{
+    border: 1px solid #ddd;
+    border-radius: 2%;
+    padding: 5px;
+}
+
+img.render {
+    border: 1px solid #ddd;
+    border-radius: 10%;
+    padding: 5px;
+    width: 76%;
+    height: auto;
+}
+
+img.render:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+.modal {
+    display: none;
+    position: absolute;
+    background-color: rgb(0,0,0);
+    background-color: rgba(120, 74, 226, 0.92);
+    overflow: auto;
+    width: 50%;
+    margin-left: 5%;
+    border-radius: 1%;
+}
+
+.title{
+    width: 30%;
+}
+
+.modal-header-footer{
+    text-align: center;
+}
+
+.img_modal{
+    border-radius: 2%;
+    width: 70%;
+    height: auto;
+    border: 1px dashed black;
+}
+
+.modal-content {
+    text-align: center;
+    animation-name: animate;
+    animation-duration: 0.5s
+}
+
+.close {
+    float: right;
+    margin-right: 2%;
+    font-size:  30px;
+    font-weight:  bold;
+}

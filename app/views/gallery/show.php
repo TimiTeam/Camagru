@@ -1,3 +1,5 @@
+
+<div class="main_panel">
 <h2> Gallery</h2>
 <?php 
 //if(isset($posts)) echo $posts;  else echo '<h3>Ther will be all users posts</h3>';
@@ -10,3 +12,4 @@ if(isset($data) && isset($data[0])){
 else
     echo '<h3>Ther will be all users posts</h3>';
 ?>
+</div>

@@ -184,7 +184,7 @@ class Account extends Model{
         <a href="http://localhost:8080/camagru/account/reset?reset_token='.$_SESSION['reset_token'].'&email='.$to .'">'.'http://localhost:8080/camagru/account/reset?reset_token='.$_SESSION['reset_token'].'</a>';
         $headers  = 'MIME-Version: 1.0' . "\r\n";
         $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-        mail($to, $subject, $message, $headers);
+        $res = mail($to, $subject, $message, $headers);
     }
 
     public function confirmEmailAndLogin($email, $login){
