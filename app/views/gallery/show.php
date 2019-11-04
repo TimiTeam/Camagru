@@ -28,12 +28,18 @@ if(isset($data) && isset($data[0])){
                                 <img class="comment_like" src="/camagru/app/res/comment.png"><u>Comments:</u> <b>'.$post['comments'].'</b>
                             </p>
                         </div>
-                        <div class="left_text">'; 
-                            if ($us)
+                        <div class="left_text">';
+                            $pth = "like.png";
+                            if ($us && !isset($_SESSION['like_'.$post['id']])){
                                 echo ' <p onclick="likeThePost(this, '.$post['id'].');">';
+                            }
+                            else if ($us && isset($_SESSION['like_'.$post['id']])){
+                                echo ' <p onclick="desLikePost(this, '.$post['id'].');">';
+                                $pth = "like_like.png";
+                            }
                             else
                                 echo ' <p>';
-                                echo'<img class="comment_like" src="/camagru/app/res/like.png"> <u>Like:</u> <b>'.$post['like'].'</b>
+                            echo'<img class="comment_like" src="/camagru/app/res/'.$pth.'"> <u>Like:</u> <b>'.$post['like'].'</b>
                             </p>
                         </div>
                     </div>

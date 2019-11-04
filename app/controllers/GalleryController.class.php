@@ -16,6 +16,10 @@ class GalleryController extends Controller{
 
     public function likePostAction(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['pos_id']) && isset($_POST['like'])){
+            if (!isset($_SESSION['like_'.$_POST['pos_id']]))
+                $_SESSION['like_'.$_POST['pos_id']] = 1;             
+            else
+                unset($_SESSION['like_'.$_POST['pos_id']]);
             $this->model->updatePost($_POST['pos_id'], array('like' => 1, 'data' => $_POST['like']));
             echo 'ok';
             exit;
