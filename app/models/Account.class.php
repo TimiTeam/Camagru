@@ -196,9 +196,11 @@ class Account extends Model{
 
     public function confirmEmailAndLogin($email, $login){
         $res = $this->db->row("SELECT * FROM `users` WHERE `login` = :logi", array('logi' => $login));
-        if ($res[0]['email'] == $email){
-            $_SESSION['user_id'] = $res[0]['id'];
-            return true;
+        if ($res){
+            if ($res[0]['email'] == $email){
+                $_SESSION['user_id'] = $res[0]['id'];
+                return true;
+            }
         }
         return false;
     }
@@ -216,6 +218,8 @@ class Account extends Model{
     }
 
     public function confirmEmail($token, $email){
+        if(!isset($_SESSION['user_id']))
+            return false;
         $user = $this->getCurrentUser($_SESSION['user_id']);
         if ($user['token'] == $token && $email == $user['email'])
         {

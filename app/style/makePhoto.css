@@ -11,6 +11,7 @@ body {
 .main_panel{
     width: 60%;
     height: 100%;
+    min-height: 720px;
     margin-left: 20%;
 }
 

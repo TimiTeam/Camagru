@@ -1,9 +1,18 @@
+html{
+   height:100%;
+}
+
+body{
+    min-height: 100%;
+}
+
 .hor_list{
     width: 60%;
     margin-left: 20%;
 }
 
 .hr{
+    width: 100%;
     margin: 0;
     padding: 4px; 
 }

@@ -85,8 +85,9 @@ class AccountController extends Controller{
                     header("Location: http://localhost:8080/camagru/account/status");
                     exit;
                 }
-                else
+                else{
                     $param['error'] = "This email not belong to ".$login;
+                }
             }
             else
                 $param['error'] = "Input error, try again";
@@ -115,8 +116,10 @@ class AccountController extends Controller{
         if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['token']) && isset($_GET['email'])){
             $token = $_GET['token'];
             $email = $_GET['email'];
-            if ($this->model->confirmEmail($token, $email))
+            if ($this->model->confirmEmail($token, $email)){
+                $_SESSION['user_id'] = 
                 $param['info'] = "Success, yor Email confirm";
+            }
             else
                 $param['info'] = "Sorry some trouble, please try again";
         }

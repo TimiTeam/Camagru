@@ -5,21 +5,25 @@
     <form action="" method="POST">
         <p id="error" style="color:red;"></p>
         <p>First name<br>
-        <input type="text" name="first_name" required onchange="inputValidation(this);"></p>
+        <input type="text" name="first_name" required minlength="1" onchange="inputValidation(this);"></p>
         <p>Last name<br>
-        <input type="text" name="last_name" required onchange="inputValidation(this);"></p>
+        <input type="text" name="last_name" required minlength="1" onchange="inputValidation(this);"></p>
         <p>E-maill <br>
-        <input type="email" name="email" size="50" required onchange="emailValidation(this);">
+        <input type="email" name="email" size="50" minlength="4" required onchange="emailValidation(this);">
         <p>Login<br>
-        <input type="text" name="login" onchange="loginValidation(this);"></p> 
+        <input type="text" name="login" required minlength="4" onchange="loginValidation(this);"></p> 
         <p>Password<br>
-        <input id="pass" type="password" required name="pass" onchange="inputValidation(this);"></p>
+        <input id="pass" type="password" required minlength="4" name="pass" onchange="inputValidation(this);"></p>
         <p>Confirm password<br>
-        <input id="confirm" type="password" required name="confirm" onchange="inputValidation(this);"></p>
-        <p><button>Register</button></p>
+        <input id="confirm" type="password" required minlength="4" name="confirm" onchange="passwordValidation(this);"></p>
+        <p><button id="registerBtn">Register</button></p>
     </form>
 </div>
 <script>
+
+var btn = document.getElementById("registerBtn");
+
+var btnParent = btn.parentNode;
 
 function    setErrorText(text){
     document.getElementById("error").textContent = text;
@@ -31,10 +35,26 @@ function    validEmail(email){
 }
 
 function    inputValidation(elem){
-    if (elem.value.length < 3)
+    if (elem.value.length < 4){
         elem.style.border = "2px solid red";
+        return false;
+    }
     else
         elem.style.border = "2px solid #EBE9ED";
+    return true;
+}
+
+function    passwordValidation(elem){
+    var ps =  document.getElementById("pass");
+    if (!inputValidation(elem) || !inputValidation(ps)){
+        setErrorText("At less 4 symbols ");
+    }
+    console.log(elem.value);
+    console.log(ps.value);
+    if (elem.value != ps.value)
+        setErrorText("Passwords do not match");
+    else
+        setErrorText("");
 }
 
 function    loginValidation(elem){
@@ -50,7 +70,6 @@ function    loginValidation(elem){
             else
                 setErrorText("");    
             inputValidation(elem);
-            
         }
     };
     var formData = new FormData();

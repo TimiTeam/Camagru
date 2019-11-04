@@ -20,10 +20,23 @@
             <a href="http://localhost:8080/camagru/"><li>Main Page </li></a>
             <a href="http://localhost:8080/camagru/gallery/show"><li>Gallery</li></a>
             <a href="http://localhost:8080/camagru/account/makePhoto"><li>Make Photo</li></a>
-            <a href="http://localhost:8080/camagru/account/setting"><li>My Settings</li></a>
+            <a href="http://localhost:8080/camagru/account/<?php if (isset($_SESSION['user_in'])) echo 'setting"><li>Account Settings</li>'; else  echo 'register"><li>Registration</li>'; ?></a>
             <a href="http://localhost:8080/camagru/account/<?php if (isset($_SESSION['user_in'])) echo 'logout"><li>Sign out</li>'; else  echo 'login"><li>Sign in</li>'; ?></a>
         </ul>
     </div>
     </header>
         <?php echo $content; 
         ?>
+        <footer>
+    <br>
+    <div class="hor_list">
+        <ul class="hr">
+            <a href="http://localhost:8080/camagru/"><li>Main Page </li></a>
+            <a href="http://localhost:8080/camagru/gallery/show"><li>Gallery</li></a>
+            <a href="http://localhost:8080/camagru/account/makePhoto"><li>Make Photo</li></a>
+            <a href="http://localhost:8080/camagru/account/<?php if (isset($_SESSION['user_in'])) echo 'setting"><li>Account Settings</li>'; else  echo 'register"><li>Registration</li>'; ?></a>
+            <a href="http://localhost:8080/camagru/account/<?php if (isset($_SESSION['user_in'])) echo 'logout"><li>Sign out</li>'; else  echo 'login"><li>Sign in</li>'; ?></a>
+        </ul>
+    </footer>
+</body>
+</html>
