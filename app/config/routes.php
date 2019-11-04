@@ -48,6 +48,10 @@ return [
 	'camagru/gallery/show' => [
 		'controller' => 'gallery',
 		'action' => 'show'
+	],
+	'camagru/gallery/likePost' => [
+		'controller' => 'gallery',
+		'action' => 'likePost'
 	]
 ];
  

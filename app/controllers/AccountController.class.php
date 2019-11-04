@@ -117,11 +117,11 @@ class AccountController extends Controller{
             $token = $_GET['token'];
             $email = $_GET['email'];
             if ($this->model->confirmEmail($token, $email)){
-                $_SESSION['user_id'] = 
                 $param['info'] = "Success, yor Email confirm";
             }
-            else
+            else{
                 $param['info'] = "Sorry some trouble, please try again";
+            }
         }
         else
             $param['info'] = 'Check your email';

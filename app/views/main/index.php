@@ -28,8 +28,23 @@
                             <p>'.$post['published'].'</p>
                         </div>
                     </div>
-                    <img class="img_user" src="/camagru/'.$post['path_photo'].'"> <br>
-                    <p><img class="comment_like" src="/camagru/app/res/comment.png"><u>Comments:</u> '.$post['comments'].' <img class="comment_like" src="/camagru/app/res/like.png"> <u>Like:</u> <b>'.$post['like'].'</b></p>
+                    <a href="http://localhost:8080/camagru/account/makePhoto">
+                        <img class="img_user" src="/camagru/'.$post['path_photo'].'"> 
+                    </a>
+                    <br>
+                    <div class="title_date">
+                        <div class="left_text">
+                            <p>
+                                <img class="comment_like" src="/camagru/app/res/comment.png"><u>Comments:</u> '.$post['comments'].' 
+                            </p>
+                        </div>
+                        <div class="left_text">
+                            <p>
+                                <img class="comment_like" src="/camagru/app/res/like.png"> <u>Like:</u> <b>'.$post['like'].'
+                            </p>
+                        </div>
+                    </div>
+                    
                 </div>
                         <p>
                         <button id="delete" value="'.$post['id'].'" onclick="deletePhoto(this);">Delete Post</button>

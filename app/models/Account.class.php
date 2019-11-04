@@ -145,7 +145,7 @@ class Account extends Model{
         $data = htmlspecialchars($_POST['posted_image']);
         if (preg_match('/^data:image\/(\w+);base64,/', $data, $type)) {
             $data = substr($data, strpos($data, ',') + 1);
-            $type = strtolower($type[1]); // jpg, png, gif
+            $type = strtolower($type[1]);
         
             if (!in_array($type, [ 'jpg', 'jpeg', 'gif', 'png' ])) {
                 throw new \Exception('invalid image type');
@@ -175,12 +175,7 @@ class Account extends Model{
         <a href="http://localhost:8080/camagru/account/status?token='.$user['token'].'&email='.$to .'">'.'http://localhost:8080/camagru/account/status?token='.$user['token'].'</a>';
         $headers  = 'MIME-Version: 1.0' . "\r\n";
         $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-       /* $headers = array(
-            'From' => 'webmaster@example.com',
-            'Reply-To' => 'webmaster@example.com',
-            'X-Mailer' => 'PHP/' . phpversion()
-        );
-*/        mail($to, $subject, $message, $headers);
+        mail($to, $subject, $message, $headers);
     }
 
     public function resetPasswordEmail($email, $login){
@@ -215,6 +210,10 @@ class Account extends Model{
         $res = $this->db->row("SELECT * FROM `users` WHERE `id` = :id",
                 array('id' => $id));
         return $res[0];
+    }
+
+    public function deleteAccount($id){
+        $res = $this->db->row("DELETE FROM `users` WHERE id = :id ", array('id' =>  $id));
     }
 
     public function confirmEmail($token, $email){
