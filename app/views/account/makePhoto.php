@@ -31,7 +31,7 @@ if (!isset($_SESSION['user_in']))
             <?php 
                 if (isset($arrayMasks)){
                     for ($i = 0; $i < count($arrayMasks); $i++){
-                        echo '<img draggable="true" onclick="moveMask(this);" class="one_mask" id="mask_'.$i.'" src="'.$arrayMasks[$i].'">';
+                        echo '<img draggable="true" onclick="moveMask(this);" class="one_mask" id="mask_'.$i.'" name="mask_'.$i.'" src="'.$arrayMasks[$i].'">';
                     }
                 }
             ?>
@@ -51,50 +51,11 @@ if (!isset($_SESSION['user_in']))
 
 <script>
 
-var drawImg = [];
-
-window.onload = function(){
-  var collection = document.getElementById("masks").childNodes;
-  if (collection){
-    for(var i = 0; i < collection.length; i++){
-      
-    }
-  }
-};
-
-var ele = document.getElementById('mask_'+1);
-if (ele != null){
-  ele.onmousedown = function(e) {
-      var newIm = new Image();
-      newIm.src = ele.src;
-      newIm.style.position = 'absolute';
-      moveAt(e);
-      document.body.appendChild(newIm);
-      function moveAt(e) {
-          newIm.style.left = e.pageX - newIm.offsetWidth / 2 + 'px';
-          newIm.style.top = e.pageY - newIm.offsetHeight / 2 + 'px';
-      }
-      document.onmousemove = function(e) {
-          moveAt(e);
-      }
-      newIm.onmouseup = function() {
-        drawImg.push(newIm);
-        document.onmousemove = null;
-        newIm.onmouseup = null;
-        console.log(newIm);
-      }
-  }
-
-}
-var maskImg = null;
-
-function moveMask(mask){
-    maskImg = mask;
-}
-
-
+var drawImg = 0;
+var newMsk = new Map();
 var video = document.getElementById('video');
 var i = 0;
+var rect = video.getBoundingClientRect();
 
 if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
@@ -103,11 +64,49 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     });
 }
 
+window.onload = function(){
+    collection = document.querySelectorAll('.one_mask');
+    if (collection){
+      for(var i = 0; i < collection.length; i++){
+          newMsk.set(collection[i].getAttribute('id'), 0);
+      }
+    }
+};
+
+function moveMask(ele){
+    ele.onclick = function(e){
+        var newIm = new Image();
+        newIm.src = ele.src;
+        var id = newMsk.get(ele.getAttribute('id')) + 1;
+        newIm.className = "mask_on_img";
+        newIm.style.position = 'absolute';
+        newIm.onclick = function(e){
+            if (e.pageY >= rect.y && e.pageY <= rect.left && e.pageX >= rect.x && e.pageX <= rect.right){
+                newIm.setAttribute('id', id);
+                newMsk.set(ele.getAttribute('id'), id);
+                document.onmousemove = null;
+                newIm.onmouseup = null;
+                drawImg++;
+            }
+            else
+                newIm.parentNode.removeChild(newIm);
+        }
+        moveAt(e);
+        document.body.appendChild(newIm);
+        function moveAt(e) {
+          newIm.style.left = e.pageX - newIm.offsetWidth / 2 + 'px';
+          newIm.style.top = e.pageY - newIm.offsetHeight / 2 + 'px';
+      }
+      document.onmousemove = function(e) {
+          moveAt(e);
+      }
+    }
+}
+
 document.getElementById("post").onclick = function() {
     saveImage();
     document.getElementById("modal").style.display = "none";
 };
-
 
 function closePostWind(){
     document.getElementById("modal").style.display = "none";
@@ -122,20 +121,22 @@ function loadImg(elem){
 }
 
 function makePhoto(){
-    if (drawImg.length == 0)
+    if (drawImg == 0)
         return;
     var canvas = document.createElement("canvas");
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
     var ctx = canvas.getContext('2d');
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-    for (var i = 0; i < drawImg.length; i++){
-        var img = drawImg[i];
-        pos = getCoords(img);
-        console.log(pos.left / canvas.width * document.documentElement.clientWidth);
-        console.log(pos.top / canvas.height * document.documentElement.clientHeight);
-        ctx.drawImage(img, pos.left/ document.documentElement.clientWidth * canvas.width, pos.top/ document.documentElement.clientHeight * canvas.height);
-    }
+    var masksArray = document.querySelectorAll(".mask_on_img");
+    console.log(rect);
+    masksArray.forEach (function(masksArray){
+        var r = masksArray.getBoundingClientRect();
+        console.log(r);
+        var x = r.left - rect.left + pageXOffset;
+        var y = r.top - rect.top + pageYOffset ;
+        ctx.drawImage(masksArray, x, y);
+    });
     var img = new Image(video.videoWidth, video.videoHeight);
     img.setAttribute("id", "img_"+i);
     img.setAttribute("onclick", "loadImg(this);");
@@ -164,8 +165,6 @@ function getOffsetSum(elem) {
   }
   return {top: Math.round(top), left: Math.round(left)}
 }
-
-
 
 function  saveImage(){
     var src = document.getElementById("posting_image").src;
