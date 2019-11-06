@@ -1,3 +1,44 @@
+<style>
+    
+.user_photo{
+    min-width: 400px;
+    border: 1px solid salmon;
+    border-radius: 2%;
+    text-align: center;
+}
+
+
+.post_info{
+    width: 60%;
+    margin-left: 20%;
+    border: 1px solid rebeccapurple;
+}
+
+.img_user{
+    width: 90%;
+    border: 2px solid black;
+}   
+
+.title_date{
+    text-align: none;
+    display: inline-flex;
+}
+
+.left_text{
+    margin-left: 0%;
+    border: 1px solid orchid;
+}
+.rigth_text{
+    margin-right: 0%;
+    border: 1px double yellowgreen;
+}
+
+.comment_like{
+    width: 22px;
+    height: 22px;;
+}
+</style>
+
 
 <div class="main_panel">
 <h2> Gallery</h2>
@@ -21,7 +62,7 @@ if(isset($data) && isset($data[0])){
                         <p>'.$post['published'].'</p>
                     </div>
                 </div>
-                <img class="img_user" src="/camagru/'.$post['path_photo'].'"> <br>
+                <img class="img_user" src="/camagru/'.$post['path_photo'].'" > <br>
                 <div class="title_date">
                         <div class="left_text">
                             <p>

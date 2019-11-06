@@ -1,3 +1,123 @@
+<style>
+body {
+    height: 100%;
+}
+
+@keyframes animate {
+    from {
+    top:-320px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+.main_panel{
+    width: 60%;
+    min-width: 400px;
+    height: 100%;
+    min-height: 720px;
+    margin-left: 20%;
+}
+
+div.cont{
+    width: 100%;
+    min-width: 420px;
+    display: inline-flex;
+    border: 2px dashed blue;
+}
+
+img.cont{
+    max-width: 100%;
+    height: auto;
+}
+
+.masks{
+    padding: 2%;
+    width: 20%;
+}
+
+div.video_div{
+    padding: 2%;
+    width: 100%;
+    min-width: 320px;
+    text-align: center;
+    display: inline-block;
+}
+
+div.rendered{
+    padding: 2%;
+    width: 20%;
+    height: 600px;
+    overflow-y:scroll;
+}
+
+video{
+    border: 1px solid #ddd;
+    border-radius: 2%;
+    width: 100%;
+    padding: 5px;
+}
+
+img.render {
+    border: 1px solid #ddd;
+    border-radius: 10%;
+    padding: 5px;
+    width: 76%;
+    height: auto;
+}
+
+.masks{
+    min-width: 64px;
+}
+
+.one_mask{
+    margin-top: 5%;
+    width: 60%;
+}
+
+img.render:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+.modal {
+    display: none;
+    position: absolute;
+    background-color: rgb(0,0,0);
+    background-color: rgba(120, 74, 226, 0.92);
+    overflow: auto;
+    z-index: 1000;
+    width: 50%;
+    margin-left: 5%;
+    border-radius: 1%;
+}
+
+.title{
+    width: 30%;
+}
+
+.modal-header-footer{
+    text-align: center;
+}
+
+.img_modal{
+    border-radius: 2%;
+    width: 70%;
+    height: auto;
+    border: 1px dashed black;
+}
+
+.modal-content {
+    text-align: center;
+    animation-name: animate;
+    animation-duration: 0.5s
+}
+
+.close {
+    float: right;
+    margin-right: 2%;
+    font-size:  30px;
+    font-weight:  bold;
+}
+</style>
+
 <?php
 if (!isset($_SESSION['user_in']))
     header("Location: http://localhost:8080/camagru/");
@@ -39,7 +159,6 @@ if (!isset($_SESSION['user_in']))
         <div class="video_div">
             <figure>
                 <video id="video" autoplay>
-
                 </video>
             </figure>
             <button class="clasic_button" id="snap" onclick="makePhoto();">Make Phto</button>
@@ -81,7 +200,8 @@ function moveMask(ele){
         newIm.className = "mask_on_img";
         newIm.style.position = 'absolute';
         newIm.onclick = function(e){
-            if (e.pageY >= rect.y && e.pageY <= rect.left && e.pageX >= rect.x && e.pageX <= rect.right){
+            var r = video.getBoundingClientRect();
+            if (e.clientY >= r.top && e.clientY <= r.bottom && e.clientX >= r.left && e.clientX <= r.right){
                 newIm.setAttribute('id', id);
                 newMsk.set(ele.getAttribute('id'), id);
                 document.onmousemove = null;
@@ -129,12 +249,24 @@ function makePhoto(){
     var ctx = canvas.getContext('2d');
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
     var masksArray = document.querySelectorAll(".mask_on_img");
-    console.log(rect);
+
+
+    var ms = video.getBoundingClientRect();
+
+    var re = getCoords(video);
+
+
+    console.log(ms);
+    console.log(re);
     masksArray.forEach (function(masksArray){
         var r = masksArray.getBoundingClientRect();
+        var pso = getCoords(masksArray);
         console.log(r);
-        var x = r.left - rect.left + pageXOffset;
-        var y = r.top - rect.top + pageYOffset ;
+        console.log(pso);
+        var x = pso.left - re.left;
+        var y = pso.top - re.top;
+        console.log(x);
+        console.log(y);
         ctx.drawImage(masksArray, x, y);
     });
     var img = new Image(video.videoWidth, video.videoHeight);

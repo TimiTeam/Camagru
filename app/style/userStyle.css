@@ -1,17 +1,18 @@
 .user_photo{
+    min-width: 400px;
     border: 1px solid salmon;
     border-radius: 2%;
     text-align: center;
 }
 
-.img_user{
-    border: 2px solid silver;
-}
 
 .post_info{
     width: 60%;
     margin-left: 20%;
-    border: 1px solid green;
+}
+
+.img_user{
+    width: 90%;
 }
 
 .title_date{
@@ -21,11 +22,9 @@
 
 .left_text{
     margin-left: 0%;
-    border: 1px solid orchid;
 }
 .rigth_text{
     margin-right: 0%;
-    border: 1px double yellowgreen;
 }
 
 .comment_like{

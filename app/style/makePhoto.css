@@ -10,6 +10,7 @@ body {
 
 .main_panel{
     width: 60%;
+    min-width: 400px;
     height: 100%;
     min-height: 720px;
     margin-left: 20%;
@@ -17,6 +18,8 @@ body {
 
 div.cont{
     width: 100%;
+    min-width: 800px;
+    min-width: 400px;
     display: inline-flex;
     border: 2px dashed blue;
 }
