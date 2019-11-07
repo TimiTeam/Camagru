@@ -14,8 +14,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" href="/camagru/app/style/userStyle.css">
-        <link rel="stylesheet" href="/camagru/app/style/makePhoto.css">
+        <link rel="stylesheet" href="/camagru/app/style/galleryStyle.css">
+        <link rel="stylesheet" href="/camagru/app/style/photoMakerStyle.css">
         <link rel="stylesheet" href="/camagru/app/style/mainStyle.css">
         <script src="/camagru/app/scripts/photoMaster.js"></script>
         <style>

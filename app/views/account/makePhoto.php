@@ -1,123 +1,3 @@
-<style>
-body {
-    height: 100%;
-}
-
-@keyframes animate {
-    from {
-    top:-320px; opacity:0}
-    to {top:0; opacity:1}
-}
-
-.main_panel{
-    width: 60%;
-    min-width: 400px;
-    height: 100%;
-    min-height: 720px;
-    margin-left: 20%;
-}
-
-div.cont{
-    width: 100%;
-    min-width: 420px;
-    display: inline-flex;
-    border: 2px dashed blue;
-}
-
-img.cont{
-    max-width: 100%;
-    height: auto;
-}
-
-.masks{
-    padding: 2%;
-    width: 20%;
-}
-
-div.video_div{
-    padding: 2%;
-    width: 100%;
-    min-width: 320px;
-    text-align: center;
-    display: inline-block;
-}
-
-div.rendered{
-    padding: 2%;
-    width: 20%;
-    height: 600px;
-    overflow-y:scroll;
-}
-
-video{
-    border: 1px solid #ddd;
-    border-radius: 2%;
-    width: 100%;
-    padding: 5px;
-}
-
-img.render {
-    border: 1px solid #ddd;
-    border-radius: 10%;
-    padding: 5px;
-    width: 76%;
-    height: auto;
-}
-
-.masks{
-    min-width: 64px;
-}
-
-.one_mask{
-    margin-top: 5%;
-    width: 60%;
-}
-
-img.render:hover {
-    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
-}
-
-.modal {
-    display: none;
-    position: absolute;
-    background-color: rgb(0,0,0);
-    background-color: rgba(120, 74, 226, 0.92);
-    overflow: auto;
-    z-index: 1000;
-    width: 50%;
-    margin-left: 5%;
-    border-radius: 1%;
-}
-
-.title{
-    width: 30%;
-}
-
-.modal-header-footer{
-    text-align: center;
-}
-
-.img_modal{
-    border-radius: 2%;
-    width: 70%;
-    height: auto;
-    border: 1px dashed black;
-}
-
-.modal-content {
-    text-align: center;
-    animation-name: animate;
-    animation-duration: 0.5s
-}
-
-.close {
-    float: right;
-    margin-right: 2%;
-    font-size:  30px;
-    font-weight:  bold;
-}
-</style>
-
 <?php
 if (!isset($_SESSION['user_in']))
     header("Location: http://localhost:8080/camagru/");
@@ -134,7 +14,7 @@ if (!isset($_SESSION['user_in']))
                     <input class="title" type="text" id="post_title" name="title" required ><br>
                 </p>
                 <p>
-                    <img class="img_modal" id="posting_image" width="640" height="480">
+                    <img class="img_modal" id="posting_image">
                 </p>
             </div>
             <div class="modal-header-footer">
@@ -157,11 +37,14 @@ if (!isset($_SESSION['user_in']))
             ?>
         </div>
         <div class="video_div">
-            <figure>
+            <div class="main_image">
                 <video id="video" autoplay>
                 </video>
-            </figure>
-            <button class="clasic_button" id="snap" onclick="makePhoto();">Make Phto</button>
+            </div>
+            <p>
+                <button class="clasic_button" id="snap" onclick="makePhoto();">Make Phto</button> 
+                <button onclick="clearVideo();">Clear</button>
+            </p>
         </div>
         <div id="photos" class="rendered">
         </div>
@@ -171,7 +54,7 @@ if (!isset($_SESSION['user_in']))
 <script>
 
 var drawImg = 0;
-var newMsk = new Map();
+var newMsk = {}
 var video = document.getElementById('video');
 var i = 0;
 var rect = video.getBoundingClientRect();
@@ -187,26 +70,36 @@ window.onload = function(){
     collection = document.querySelectorAll('.one_mask');
     if (collection){
       for(var i = 0; i < collection.length; i++){
-          newMsk.set(collection[i].getAttribute('id'), 0);
+          newMsk[collection[i].getAttribute('id')] = 0;
       }
     }
 };
 
+function clearVideo(){
+    var masksArray = document.querySelectorAll(".mask_on_img");
+    if (masksArray.lenght <= 0)
+        return ;
+    masksArray.forEach(function(masksArray){
+        masksArray.parentNode.removeChild(masksArray);
+    });
+}
+
 function moveMask(ele){
     ele.onclick = function(e){
-        var newIm = new Image();
+        var newIm = new Image(64,64);
         newIm.src = ele.src;
-        var id = newMsk.get(ele.getAttribute('id')) + 1;
+        var id = newMsk[ele.getAttribute('id')] + 1;
         newIm.className = "mask_on_img";
         newIm.style.position = 'absolute';
         newIm.onclick = function(e){
             var r = video.getBoundingClientRect();
             if (e.clientY >= r.top && e.clientY <= r.bottom && e.clientX >= r.left && e.clientX <= r.right){
-                newIm.setAttribute('id', id);
-                newMsk.set(ele.getAttribute('id'), id);
+                newIm.setAttribute('id', ele.getAttribute("name") + id);
+                newMsk[ele.getAttribute('id')] = id;
                 document.onmousemove = null;
                 newIm.onmouseup = null;
                 drawImg++;
+                console.log(e);
             }
             else
                 newIm.parentNode.removeChild(newIm);
@@ -243,33 +136,29 @@ function loadImg(elem){
 function makePhoto(){
     if (drawImg == 0)
         return;
+    video = document.getElementById('video');
     var canvas = document.createElement("canvas");
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
+    canvas.width = 640;
+    canvas.height = 480;
     var ctx = canvas.getContext('2d');
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-    var masksArray = document.querySelectorAll(".mask_on_img");
-
-
-    var ms = video.getBoundingClientRect();
-
-    var re = getCoords(video);
-
-
-    console.log(ms);
-    console.log(re);
-    masksArray.forEach (function(masksArray){
-        var r = masksArray.getBoundingClientRect();
-        var pso = getCoords(masksArray);
-        console.log(r);
-        console.log(pso);
-        var x = pso.left - re.left;
-        var y = pso.top - re.top;
-        console.log(x);
-        console.log(y);
-        ctx.drawImage(masksArray, x, y);
-    });
-    var img = new Image(video.videoWidth, video.videoHeight);
+    ctx.drawImage(video, 0, 0);
+    var posCanvs = getCoords(video);
+    for(var k in newMsk){
+        if (k in newMsk && newMsk[k] > 0){
+            for(var i = 1; i <= newMsk[k]; i++){
+                var mask = document.getElementById(k+i);
+                if (mask){
+                    var pos = getCoords(mask);
+                    var y = pos.top - posCanvs.top;
+                    var x = pos.left - posCanvs.left;
+                    console.log(x);
+                    console.log(y);
+                    ctx.drawImage(mask, x, y);
+                }
+            }
+        }
+    }
+    var img = new Image();
     img.setAttribute("id", "img_"+i);
     img.setAttribute("onclick", "loadImg(this);");
     img.classList.add("render");
@@ -280,12 +169,11 @@ function makePhoto(){
 }
 
 function getCoords(elem) {
-  let box = elem.getBoundingClientRect();
-
-  return {
-    top: box.top + pageYOffset,
-    left: box.left + pageXOffset
-  };
+    let box = elem.getBoundingClientRect();
+    var top=0, left=0
+    top = parseFloat(box.top) + parseFloat(pageYOffset);
+    left = parseFloat(box.left) + parseFloat(pageXOffset);
+    return {top: Math.round(top), left: Math.round(left)}
 }
 
 function getOffsetSum(elem) {

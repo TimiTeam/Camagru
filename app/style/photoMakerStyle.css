@@ -10,18 +10,19 @@ body {
 
 .main_panel{
     width: 60%;
-    min-width: 400px;
-    height: 100%;
     min-height: 720px;
     margin-left: 20%;
 }
 
 div.cont{
     width: 100%;
-    min-width: 800px;
-    min-width: 400px;
+    min-width: 500px;
     display: inline-flex;
-    border: 2px dashed blue;
+    border: 2px dashed blueviolet;
+}
+
+.mask_on_img{
+    display: absolute;
 }
 
 img.cont{
@@ -29,9 +30,9 @@ img.cont{
     height: auto;
 }
 
-.masks{
-    padding: 2%;
-    width: 20%;
+.main_image{
+    display: hidden;
+    width: 100%
 }
 
 div.video_div{
@@ -52,27 +53,27 @@ video{
     border: 1px solid #ddd;
     border-radius: 2%;
     width: 100%;
-    padding: 5px;
 }
 
 img.render {
     border: 1px solid #ddd;
     border-radius: 10%;
     padding: 5px;
-    width: 76%;
+    width: 100%;
     height: auto;
 }
 
 .masks{
     padding: 2%;
-    width: 20%;
-    height: 600px;
+    widows: 100%;
+    height: auto;
 }
 
 .one_mask{
     margin-left: 5%;
-    margin-top: 5%; 
+    margin-top: 5%;
     width: 60%;
+    height: auto;
 }
 
 img.render:hover {

@@ -1,12 +1,13 @@
 .user_photo{
-    min-width: 400px;
+    min-width: 500px;
     border: 1px solid salmon;
     border-radius: 2%;
     text-align: center;
 }
 
-
 .post_info{
+    border: 1px solid blueviolet;
+    border-radius: 1%;
     width: 60%;
     margin-left: 20%;
 }
