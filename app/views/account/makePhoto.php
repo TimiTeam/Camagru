@@ -138,10 +138,10 @@ function makePhoto(){
         return;
     video = document.getElementById('video');
     var canvas = document.createElement("canvas");
-    canvas.width = 640;
-    canvas.height = 480;
+    canvas.width = video.getBoundingClientRect().width;
+    canvas.height = video.getBoundingClientRect().height;
     var ctx = canvas.getContext('2d');
-    ctx.drawImage(video, 0, 0);
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
     var posCanvs = getCoords(video);
     for(var k in newMsk){
         if (k in newMsk && newMsk[k] > 0){
@@ -158,7 +158,7 @@ function makePhoto(){
             }
         }
     }
-    var img = new Image();
+    var img = new Image(canvas.width, canvas.height);
     img.setAttribute("id", "img_"+i);
     img.setAttribute("onclick", "loadImg(this);");
     img.classList.add("render");
@@ -173,7 +173,7 @@ function getCoords(elem) {
     var top=0, left=0
     top = parseFloat(box.top) + parseFloat(pageYOffset);
     left = parseFloat(box.left) + parseFloat(pageXOffset);
-    return {top: Math.round(top), left: Math.round(left)}
+  return {top: Math.round(top), left: Math.round(left)}
 }
 
 function getOffsetSum(elem) {
