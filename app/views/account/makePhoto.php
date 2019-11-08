@@ -57,6 +57,8 @@ var drawImg = 0;
 var newMsk = {}
 var video = document.getElementById('video');
 var i = 0;
+var currImg = null;
+var lastScrollTop = 0;
 var rect = video.getBoundingClientRect();
 
 if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -84,15 +86,33 @@ function clearVideo(){
     });
 }
 
+function resizeMaskOnScroll(){
+    if(currImg == null || currImg.width > 400)
+        return ;
+    console.log(window.pageYOffset);
+    let curScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  //  if (curScroll > lastScrollTop || curScroll > lastScrollTop) {
+    if (curScroll != lastScrollTop || curScroll != lastScrollTop){
+        currImg.width += 10;
+    } else {
+        currImg.width -= 10;
+    }
+    lastScrollTop = curScroll <= 0 ? 0 : curScroll;
+}
+
+window.addEventListener('scroll', resizeMaskOnScroll);
+
 function moveMask(ele){
     ele.onclick = function(e){
-        var newIm = new Image(64,64);
+        let newIm = new Image();
         newIm.src = ele.src;
-        var id = newMsk[ele.getAttribute('id')] + 1;
+        let id = newMsk[ele.getAttribute('id')] + 1;
         newIm.className = "mask_on_img";
         newIm.style.position = 'absolute';
+        currImg = newIm;
         newIm.onclick = function(e){
-            var r = video.getBoundingClientRect();
+            currImg = null;
+            let r = video.getBoundingClientRect();
             if (e.clientY >= r.top && e.clientY <= r.bottom && e.clientX >= r.left && e.clientX <= r.right){
                 newIm.setAttribute('id', ele.getAttribute("name") + id);
                 newMsk[ele.getAttribute('id')] = id;
@@ -153,7 +173,7 @@ function makePhoto(){
                     var x = pos.left - posCanvs.left;
                     console.log(x);
                     console.log(y);
-                    ctx.drawImage(mask, x, y);
+                    ctx.drawImage(mask, x, y, mask.width, mask.height);
                 }
             }
         }
