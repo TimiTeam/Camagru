@@ -21,9 +21,9 @@ return [
 		'controller' => 'account',
 		'action' => 'setting'
 	],
-	'camagru/account/validLogin' => [
+	'camagru/account/validData' => [
 		'controller' => 'account',
-		'action' => 'validLogin'
+		'action' => 'validData'
 	],
 	'camagru/account/reset' => [
 		'controller' => 'account',
@@ -49,6 +49,16 @@ return [
 		'controller' => 'gallery',
 		'action' => 'show'
 	],
+
+    'camagru/gallery/showPost' => [
+        'controller' => 'gallery',
+        'action' => 'showPost'
+    ],
+
+    'camagru/gallery/account' => [
+        'controller' => 'gallery',
+        'action' => 'account'
+    ],
 	'camagru/gallery/likePost' => [
 		'controller' => 'gallery',
 		'action' => 'likePost'

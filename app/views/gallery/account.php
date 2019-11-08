@@ -1,18 +1,17 @@
 
 <div class="main_panel">
-    <h2> Gallery</h2>
-    <form action="" method="get">
-        <p>Search by nickname
-        <input type="text" name="nickname">
-        <button>Search</button>
-        </p>
-    </form>
-<?php 
+<?php
 
 if (isset($_SESSION['user_in']))
     $us = true;
 else
     $us = false;
+
+if(isset($userInfo)){
+    echo '<h3>'.$userInfo['nickname'].'</h3>
+<p>'.$userInfo['first_name']."  ".$userInfo['last_name'].'</p>
+<p>'.$userInfo['email'].'</p>';
+}
 
 if(isset($data) && isset($data[0])){
     echo '<div class="user_photo">';
@@ -38,17 +37,17 @@ if(isset($data) && isset($data[0])){
                             </p>
                         </div>
                         <div class="left_text">';
-                            $pth = "like.png";
-                            if ($us && !isset($_SESSION['like_'.$post['id']])){
-                                echo ' <p onclick="likeThePost(this, '.$post['id'].');">';
-                            }
-                            else if ($us && isset($_SESSION['like_'.$post['id']])){
-                                echo ' <p onclick="desLikePost(this, '.$post['id'].');">';
-                                $pth = "like_like.png";
-                            }
-                            else
-                                echo ' <p>';
-                            echo'<img class="comment_like" src="/camagru/app/res/'.$pth.'"> <u>Like:</u> <b>'.$post['like'].'</b>
+        $pth = "like.png";
+        if ($us && !isset($_SESSION['like_'.$post['id']])){
+            echo ' <p onclick="likeThePost(this, '.$post['id'].');">';
+        }
+        else if ($us && isset($_SESSION['like_'.$post['id']])){
+            echo ' <p onclick="desLikePost(this, '.$post['id'].');">';
+            $pth = "like_like.png";
+        }
+        else
+            echo ' <p>';
+        echo'<img class="comment_like" src="/camagru/app/res/'.$pth.'"> <u>Like:</u> <b>'.$post['like'].'</b>
                             </p>
                         </div>
                     </div>
@@ -56,8 +55,8 @@ if(isset($data) && isset($data[0])){
             <br>';
     }
     echo '</div>';
-}   
+}
 else
-    echo '<h3>Ther will be all users posts</h3>';
+    echo '<h3>Ther will be all user posts</h3>';
 ?>
 </div>

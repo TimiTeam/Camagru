@@ -26,12 +26,20 @@ class AccountController extends Controller{
         $this->view->render("MakePhoto", $param);
     }
 
-    public function postPhotoAction($param = []){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['posted_image'])){
-            if ($this->model->makeImage())
+    public function postPhotoAction($param = [])
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (isset($_POST['posted_image']) && $this->model->makeImage()) {
                 echo 'http://localhost:8080/camagru/gallery/show';
+                exit;
+            }
+            echo 'error';
         }
-        return 'error';
+        else
+        {
+            header("Location: http://localhost:8080/camagru/");
+            exit;
+        }
     }
     
     public function logoutAction($param = []){
@@ -49,14 +57,24 @@ class AccountController extends Controller{
         $this->view->render($user['login']."Account", $user);
     }
     
-    public function validLoginAction(){
+    public function validDataAction(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $login = htmlspecialchars(trim($_POST["login"]));
-            if (isset($login) && $this->model->isNewLogin($login))
-                echo 'ok';
-            else
-                echo 'login exist';
+            if (isset($_POST['login'])) {
+                $login = htmlspecialchars(trim($_POST["login"]));
+                if (isset($login) && $this->model->isNewLogin($login)) {
+                    echo 'ok';
+                    exit;
+                }
+            }
+            else if (isset($_POST['nickname'])){
+                $nick = htmlspecialchars(trim($_POST["nickname"]));
+                if (isset($nick) && $this->model->isNewNickname($nick)) {
+                    echo 'ok';
+                    exit;
+                }
+            }
         }
+        echo "error";
     }
 
     public function validPasswordAction(){

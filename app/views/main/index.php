@@ -1,5 +1,4 @@
 
-
     <div class="main_panel">
     <?php if (!isset($_SESSION['user_in'])){
         echo '<h3>Welcome is camagru</h3>
@@ -31,12 +30,12 @@
                     </div>
                     <a href="http://localhost:8080/camagru/account/makePhoto">
                         <img class="img_user" src="/camagru/'.$post['path_photo'].'"> 
-                    </a>
-                    <br>
+                    
+                    <br>    
                     <div class="title_date">
                         <div class="left_text">
                             <p>
-                                <img class="comment_like" src="/camagru/app/res/comment.png"><u>Comments:</u> '.$post['comments'].' 
+                                <img class="comment_like" src="/camagru/app/res/comment.png"><u>Comments:</u></a> '.$post['comments'].' 
                             </p>
                         </div>
                         <div class="left_text">
@@ -56,3 +55,12 @@
         }
         ?>
     </div>
+
+    <script>
+        function deletePhoto(elem){
+            console.log(elem);
+        }
+        function    showFullPost(postId){
+            document.location.href = "gallery/showPost?post_id="+postId;
+        }
+    </script>

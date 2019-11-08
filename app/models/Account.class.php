@@ -40,6 +40,7 @@ class Account extends Model{
     public function register(){
         $vars = array ('first_name' => htmlentities($_POST['first_name']),
             'last_name' => htmlentities($_POST['last_name']),
+            'nickname' => htmlentities($_POST['nickname']),
             'email' => htmlentities($_POST['email']),
             'login' => htmlentities($_POST['login']),
             'password' => htmlentities($_POST['pass']),
@@ -56,7 +57,6 @@ class Account extends Model{
         if (!isset($errors[0])){
             if ($this->isNewLogin($vars['login'])){
                 $res = $this->addNewUser($vars);
-                \m_debug($res);
                 $_SESSION['user_login'] = $vars['login'];
                 $_SESSION['user_id'] = $this->db->column("SELECT `id` FROM `users` WHERE `login` =:login", array('login' => $vars['login']));
                 header("Location: http://localhost:8080/camagru/account/status");
@@ -72,6 +72,7 @@ class Account extends Model{
     public function changeUserData($user){
         $vars = array ('first_name' => htmlentities($_POST['first_name']),
             'last_name' => htmlentities($_POST['last_name']),
+            'nickname' => htmlentities($_POST['nickname']),
             'email' => htmlentities($_POST['email']),
             'login' => htmlentities($_POST['login']),
             'notify' => htmlentities($_POST['notify']),
@@ -110,9 +111,16 @@ class Account extends Model{
         return true;
     }
 
+    public function isNewNickname($nickname){
+        $res = $this->db->column("SELECT `id` FROM `users` WHERE `nickname` = :nickname", array('nickname' => $nickname));
+        if ($res)
+            return false;
+        return true;
+    }
+
     private function addNewUser($vars){
-        $res = $this->db->row('INSERT INTO `users` (`first_name`, `last_name`, `email`, `login`, `password`, `token`)
-        VALUES (:first_name, :last_name, :email, :login, :password, :token);', $vars);
+        $res = $this->db->row('INSERT INTO `users` (`first_name`, `last_name`, `nickname`, `email`, `login`, `password`, `token`)
+        VALUES (:first_name, :last_name, :nickname, :email, :login, :password, :token);', $vars);
         return $res;
     }
 
@@ -157,14 +165,15 @@ class Account extends Model{
         } else {
             throw new \Exception('did not match data URI with image data');
         }
-        $user = $_SESSION['user_login'];
+        $user = $this->getCurrentUser($_SESSION['user_id']);
+        if ($user == false)
+            return false;
         $date = date("H:i:s_m.d.y");
-        $user_id = $_SESSION['user_id'];
         $title = htmlentities($_POST['title']);
-        $fileName = "users_photo/img_{$user}_{$date}.{$type}";
+        $fileName = "users_photo/img_{$user['login']}_{$date}.{$type}";
         file_put_contents($fileName, $data);
-        $res = $this->db->row('INSERT INTO `posts` (`user_id`, `published`, `title`, `path_photo`)
-        VALUES (:usr_id, :published, :title, :path_photo);', array('usr_id' => $user_id, 'published' => date("Y-m-d H:i:s"), 'title' => $title, 'path_photo' => $fileName));
+        $res = $this->db->row('INSERT INTO `posts` (`user_name`, `user_id`, `published`, `title`, `path_photo`)
+        VALUES (:user_name, :usr_id, :published, :title, :path_photo);', array('user_name' => $user['nickname'],'usr_id' => $user['id'], 'published' => date("Y-m-d H:i:s"), 'title' => $title, 'path_photo' => $fileName));
         return (true);
     }
 
@@ -209,7 +218,9 @@ class Account extends Model{
     public function getCurrentUser($id){
         $res = $this->db->row("SELECT * FROM `users` WHERE `id` = :id",
                 array('id' => $id));
-        return $res[0];
+        if (isset($res[0]))
+            return $res[0];
+        return false;
     }
 
     public function deleteAccount($id){

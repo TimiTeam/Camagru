@@ -1,6 +1,3 @@
-function deletePhoto(e){
-    console.log(e.velue);
-}
 
 function    updatePost(id, like){
     var request = new XMLHttpRequest();
@@ -42,6 +39,3 @@ function    likeThePost(elem, id){
     }
 }
 
-function    showFullPost(div){
-    console.log(div);
-}

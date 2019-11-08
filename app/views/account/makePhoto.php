@@ -89,7 +89,6 @@ function clearVideo(){
 function resizeMaskOnScroll(){
     if(currImg == null || currImg.width > 400)
         return ;
-    console.log(window.pageYOffset);
     let curScroll = document.body.scrollTop || document.documentElement.scrollTop;
   //  if (curScroll > lastScrollTop || curScroll > lastScrollTop) {
     if (curScroll != lastScrollTop || curScroll != lastScrollTop){
@@ -119,7 +118,6 @@ function moveMask(ele){
                 document.onmousemove = null;
                 newIm.onmouseup = null;
                 drawImg++;
-                console.log(e);
             }
             else
                 newIm.parentNode.removeChild(newIm);
@@ -171,8 +169,6 @@ function makePhoto(){
                     var pos = getCoords(mask);
                     var y = pos.top - posCanvs.top;
                     var x = pos.left - posCanvs.left;
-                    console.log(x);
-                    console.log(y);
                     ctx.drawImage(mask, x, y, mask.width, mask.height);
                 }
             }
@@ -215,7 +211,7 @@ function  saveImage(){
             if (this.responseText == "error"){
                 alert("Some error, ty again");
             }
-                document.location.href = this.responseText;
+            document.location.href = this.responseText.replace(/\n|\r/g, "");
         }
     };
     var formData = new FormData();
