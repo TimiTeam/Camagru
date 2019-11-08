@@ -7,6 +7,8 @@
         $dt = array ('Register' =>'<a href="http://localhost:8080/camagru/account/register"><li>Registration</li>',
             'LogIn' => '<a href="http://localhost:8080/camagru/account/login"><li>Sign in</li></a>');
     }
+
+
     ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -17,7 +19,7 @@
         <link rel="stylesheet" href="/camagru/app/style/mainStyle.css">
         <link rel="stylesheet" href="/camagru/app/style/photoMakerStyle.css">
         <link rel="stylesheet" href="/camagru/app/style/galleryStyle.css">
-        <script src="/camagru/app/scripts/photoMaster.js"></script>
+        <script src="/camagru/app/scripts/postWorker.js"></script>
         <title><?php echo $title?></title>
     </head>
     <body>

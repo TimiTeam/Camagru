@@ -7,12 +7,18 @@
         <button>Search</button>
         </p>
     </form>
-<?php 
+<?php
 
-if (isset($_SESSION['user_in']))
-    $us = true;
-else
-    $us = false;
+function searchCurrUserLike($likesArray){
+    if (isset($_SESSION['user_id'])) {
+        $currUser = $_SESSION['user_id'];
+        foreach ($likesArray as $like) {
+            if ($like['user_id'] == $currUser)
+                return true;
+        }
+    }
+    return false;
+}
 
 if(isset($data) && isset($data[0])){
     echo '<div class="user_photo">';
@@ -37,18 +43,17 @@ if(isset($data) && isset($data[0])){
                                 <img class="comment_like" src="/camagru/app/res/comment.png"><u>Comments:</u> <b>'.$post['comments'].'</b>
                             </p>
                         </div>
-                        <div class="left_text">';
-                            $pth = "like.png";
-                            if ($us && !isset($_SESSION['like_'.$post['id']])){
-                                echo ' <p onclick="likeThePost(this, '.$post['id'].');">';
+                        <div class="left_text">
+                        <p>';
+                            $tag = "<img class=\"comment_like\" src=\"/camagru/app/res/";
+                            if (searchCurrUserLike($likes[$post['id']])){
+                                $tag .= 'like_like.png" onclick="disLikePost(this, '.$post['id'].');"';
                             }
-                            else if ($us && isset($_SESSION['like_'.$post['id']])){
-                                echo ' <p onclick="desLikePost(this, '.$post['id'].');">';
-                                $pth = "like_like.png";
+                            else if(isset($_SESSION['user_id'])){
+                                $tag .= 'like.png" onclick="likeThePost(this, '.$post['id'].');"';
                             }
-                            else
-                                echo ' <p>';
-                            echo'<img class="comment_like" src="/camagru/app/res/'.$pth.'"> <u>Like:</u> <b>'.$post['like'].'</b>
+                            $tag.='like.png" >';
+                            echo $tag.' <u>Like:</u> <b>'.$post['like'].'</b>
                             </p>
                         </div>
                     </div>

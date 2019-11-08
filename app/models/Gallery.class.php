@@ -10,6 +10,15 @@ class Gallery extends Model{
         return ($res);
     }
 
+    public function deleteLine($posId, $user){
+        $res = $this->db->row( 'DELETE FROM `likes_posts` WHERE `user_id` = :user_id AND `post_id` = :post_id;', array('user_id' => $user['id'], 'post_id' => $posId));
+    }
+
+    public function addLike($posId, $user){
+        $res = $this->db->row('INSERT INTO `likes_posts` (`post_id`, `user_id`, `nickname`) VALUES( :post_id , :user_id , :nickname) ',
+        array('post_id' => $posId, 'user_id' => $user['id'], 'nickname' => $user['nickname']));
+    }
+
     public function updatePost($postId, $updates = []){
         if (isset($updates['like']))
             $str = "SET `like` =:data";
@@ -42,5 +51,18 @@ class Gallery extends Model{
         }
         else
             return false;
+    }
+
+    private function getPostLikes($postId){
+        $res = $this->db->row("SELECT * FROM `likes_posts` WHERE `post_id` = :post_id", array('post_id' => $postId));
+        return $res;
+    }
+
+    public function getAllLikes($allPosts){
+        $likes = [];
+        foreach ($allPosts as $post) {
+            $likes[$post['id']] = $this->getPostLikes($post['id']);
+        }
+        return $likes;
     }
 }
