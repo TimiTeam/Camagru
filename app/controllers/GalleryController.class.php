@@ -48,15 +48,20 @@ class GalleryController extends Controller{
 
     public function showPostAction(){
         if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['post_id'])){
+			$post_id = htmlentities($_GET['post_id']);
+			$post = $this->model->getCurrentPost($post_id);
+        	if (isset($_GET['comment'])){
+        		$comment = htmlentities($_GET['comment']);
+        		$this->model->updateCommentToPost($post, $comment);
+				$post = $this->model->getCurrentPost($post_id);
+			}
             $comments = [];
-            $userLikes = [];
-            $post_id = htmlentities($_GET['post_id']);
-            $post = $this->model->getCurrentPost($post_id);
-            if ($post == false) {
-                echo '<h3>Post not exist</h3>';
-                exit;
-            }
-            $this->view->render("Post", array('data' => $post, 'comments' => $comments, 'likes' => $userLikes));
+            $likes = [];
+            if ($post) {
+				$likes = $this->model->getPostLikes($post['id']);
+				$comments = $this->model->getPostComments($post['id']);
+			}
+            $this->view->render("Post", array('post' => $post, 'comments' => $comments, 'likes' => $likes));
         }
         exit;
     }

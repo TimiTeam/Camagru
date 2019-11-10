@@ -1,0 +1,54 @@
+.user_photo{
+    min-width: 500px;
+    border: 1px solid salmon;
+    border-radius: 2%;
+    text-align: center;
+}
+
+.post_info{
+    border: 1px solid red;
+    border-radius: 1%;
+    width: 60%;
+    margin-left: 20%;
+}
+
+.img_user{
+    width: 90%;
+}
+
+.title_date{
+    display: inline-flex;
+}
+
+.left_text{
+    text-align: left;
+}
+.right_text{
+    text-align: right;
+}
+.one_comment{
+    border: 1px solid lightcoral;
+    margin: 2%;
+}
+
+textarea
+{
+    width:95%;
+    text-align: left;
+}
+
+.leave_comment{
+    width:100%;
+    margin: 2%;
+    text-align: left;
+}
+
+.comment_data{
+    border: 1px solid black;
+    text-align: left;
+}
+
+.comment_like{
+    width: 22px;
+    height: 22px;;
+}

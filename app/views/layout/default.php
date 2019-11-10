@@ -18,7 +18,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="/camagru/app/style/mainStyle.css">
         <link rel="stylesheet" href="/camagru/app/style/photoMakerStyle.css">
-        <link rel="stylesheet" href="/camagru/app/style/galleryStyle.css">
+        <link rel="stylesheet" href="/camagru/app/style/postStyle.css">
         <script src="/camagru/app/scripts/postWorker.js"></script>
         <title><?php echo $title?></title>
     </head>

@@ -36,6 +36,7 @@ if(isset($data) && isset($data[0])){
                     </div>
                 </div>
                 <p>'.$post['title'].'</p>
+                <a href="http://localhost:8080/camagru/gallery/showPost?post_id='.$post['id'].'">
                 <img class="img_user" src="/camagru/'.$post['path_photo'].'" > <br>
                 <div class="title_date">
                         <div class="left_text">
@@ -43,6 +44,7 @@ if(isset($data) && isset($data[0])){
                                 <img class="comment_like" src="/camagru/app/res/comment.png"><u>Comments:</u> <b>'.$post['comments'].'</b>
                             </p>
                         </div>
+                        </a>
                         <div class="left_text">
                         <p>';
                             $tag = "<img class=\"comment_like\" src=\"/camagru/app/res/";

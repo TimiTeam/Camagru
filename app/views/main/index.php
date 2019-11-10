@@ -19,7 +19,7 @@
             echo '<div class="user_photo">';
             foreach($posts as $post){
                 echo '
-                <div class="post_info" onclick="showFullPost('.$post['id'].');">
+                <div class="post_info">
                     <div class="title_date">
                         <div class="left_text">
                             <p>'.$post['title'].'</p>

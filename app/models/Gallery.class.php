@@ -23,7 +23,7 @@ class Gallery extends Model{
         if (isset($updates['like']))
             $str = "SET `like` =:data";
         else if (isset($updates['comment']))
-            $str = "SET `comment` =:data";
+            $str = "SET `comments` =:data";
         else
             return false;
         $res = $this->db->row('UPDATE `posts` '.$str.' WHERE id =:id ', array('data' => $updates['data'], 'id' => $postId));
@@ -53,12 +53,29 @@ class Gallery extends Model{
             return false;
     }
 
-    private function getPostLikes($postId){
+    public function getPostLikes($postId){
         $res = $this->db->row("SELECT * FROM `likes_posts` WHERE `post_id` = :post_id", array('post_id' => $postId));
         return $res;
     }
 
-    public function getAllLikes($allPosts){
+	public function getPostComments($postId){
+		$res = $this->db->row("SELECT * FROM `comments_posts` WHERE `post_id` = :post_id", array('post_id' => $postId));
+		return $res;
+	}
+
+	public function updateCommentToPost($post, $comment){
+    	$user = $this->getUserInfo($_SESSION['user_id']);
+    	$res = [];
+    	if ($user && $post) {
+    		$count = intval($post['comments']) + 1;
+			$res['comment'] = $this->db->row("INSERT INTO comments_posts (`post_id`, `user_id`, `nickname`, `comment`) VALUES (:post_id, :user_id, :nickname, :comment)",
+				array('post_id' => $post['id'], 'user_id' => $user['id'], 'nickname' => $user['nickname'], 'comment' => $comment));
+			$res['post_update'] = $this->updatePost($post['id'], array('comment' => 1, 'data' => $count));
+		}
+		return $res;
+	}
+
+	public function getAllLikes($allPosts){
         $likes = [];
         foreach ($allPosts as $post) {
             $likes[$post['id']] = $this->getPostLikes($post['id']);
