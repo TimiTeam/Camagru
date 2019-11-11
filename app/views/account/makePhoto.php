@@ -42,7 +42,8 @@ if (!isset($_SESSION['user_in']))
                 </video>
             </div>
             <p>
-                <button class="clasic_button" id="snap" onclick="makePhoto();">Make Phto</button> 
+                <button class="clasic_button" id="snap" onclick="makePhoto();">Make Phto</button> or
+                <input name="myFile" type="file" accept=".jpg, .jpeg, .png" onchange="uploadImgOnScreen(this);">
                 <button onclick="clearVideo();">Clear</button>
             </p>
         </div>
@@ -84,6 +85,20 @@ function clearVideo(){
     masksArray.forEach(function(masksArray){
         masksArray.parentNode.removeChild(masksArray);
     });
+}
+
+function uploadImgOnScreen(elem) {
+    if (elem.files && elem.files[0]) {
+        let image = document.createElement('img');
+        image.src = window.URL.createObjectURL(elem.files[0]);
+        image.setAttribute('id', "video");
+        let vi = document.getElementById("video");
+        let parent = vi.parentNode;
+        parent.removeChild(vi);
+        parent.append(image);
+
+        video = image;
+    }
 }
 
 function resizeMaskOnScroll(){
