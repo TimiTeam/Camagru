@@ -32,8 +32,12 @@ echo '<div class="user_photo">
                                 <img class="comment_like" src="/camagru/app/res/comment.png"><u>Comments:</u> <b>'.$post['comments'].'</b>
                             </p>
                         </div>
-                        </a>
                         <div class="right_text">
+                        <div class="users_likes" id="usr_likes'.$post['id'].'"><p>';
+                            foreach ($likes as $like){
+                                echo '<a href="account?user_id='.$like['user_id'].'">'.$like['nickname'].'</a><br>';
+                            }
+                        echo '</p></div>
                         <p>';
                              $tag = "<img class=\"comment_like\" src=\"/camagru/app/res/";
                             if (searchCurrUserLike($likes)){
@@ -43,7 +47,7 @@ echo '<div class="user_photo">
                                 $tag .= 'like.png" onclick="likeThePost(this, '.$post['id'].');"';
                             }
                             $tag.='like.png" >';
-                            echo $tag.' <u>Like:</u> <b>'.$post['like'].'</b>
+                            echo $tag.' <u class="likes" id="likes_'.$post['id'].'">Like:</u> <b>'.$post['like'].'</b>
                             </p>
                         </div>
                 </div>
@@ -52,7 +56,7 @@ echo '<div class="user_photo">
                 		echo '<div class="one_comment">
 								<div class="left_text">
 									<a href="account?user_id='.$comment['user_id'].'">
-                            			<p>'.$comment['nickname'].'</p>
+                            			<b>'.$comment['nickname'].'</b>
                         			</a>
                         		</div>
                         		<div class="comment_data">
@@ -64,7 +68,7 @@ echo '<div class="user_photo">
 				<div class="leave_comment">
 					<form action="#" method="get">
 						<input type="hidden" name="post_id" value="'.$post['id'].'">
-						<textarea rows="6" name="comment" autofocus></textarea >
+						<textarea rows="6" name="comment" ></textarea >
 						<br>
 						<button>
 							Leave a comment
@@ -75,3 +79,7 @@ echo '<div class="user_photo">
             </div>
             <br>
          </div>';
+                	?>
+    <script>
+
+    </script>

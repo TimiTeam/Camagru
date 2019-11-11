@@ -26,6 +26,20 @@
 .right_text{
     text-align: right;
 }
+
+.users_likes{
+    display: none;
+    border: 1px dashed black;
+    position: absolute;
+    min-width: 8%;
+    min-height: 8%;
+    background-color: rgb(0,0,0);
+    background-color: rgba(120, 74, 226, 0.92);
+    overflow: auto;
+    text-align: center;
+    z-index: 1000;
+}
+
 .one_comment{
     border: 1px solid lightcoral;
     margin: 2%;

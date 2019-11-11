@@ -1,4 +1,25 @@
 
+window.onload = function () {
+    let collection = document.querySelectorAll('.likes');
+    if (collection){
+        for(let i = 0; i < collection.length; i++){
+            let elem = document.getElementById(collection[i].getAttribute('id'));
+            if (elem){
+                elem.onmouseover = function () {
+                    let id = this.getAttribute('id').split('_');
+                    let div = document.getElementById('usr_likes'+id[1]);
+                    if (div && div.firstChild){
+                        div.style.display = "block";
+                        div.onmouseout = function () {
+                            this.style.display = "none";
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 function    updatePost(id, like, status){
     let request = new XMLHttpRequest();
     request.open("POST", "likePost");

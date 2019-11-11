@@ -54,6 +54,10 @@ class GalleryController extends Controller{
         		$comment = htmlentities($_GET['comment']);
         		$this->model->updateCommentToPost($post, $comment);
 				$post = $this->model->getCurrentPost($post_id);
+				$url = explode('&', $_SERVER['REQUEST_URI']);
+				header('Location: http://localhost:8080'.$url[0]);
+				m_debug($url);
+				exit;
 			}
             $comments = [];
             $likes = [];

@@ -69,9 +69,9 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 }
 
 window.onload = function(){
-    collection = document.querySelectorAll('.one_mask');
+    let collection = document.querySelectorAll('.one_mask');
     if (collection){
-      for(var i = 0; i < collection.length; i++){
+      for(let i = 0; i < collection.length; i++){
           newMsk[collection[i].getAttribute('id')] = 0;
       }
     }
