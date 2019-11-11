@@ -63,6 +63,19 @@ class Gallery extends Model{
 		return $res;
 	}
 
+	private function sendCommentInEmail($from, $to, $mess, $postId){
+		$subject = 'New comment';
+		$message = 'Hello '.$to['first_name'].' '.$to['last_name'].'<br> <a href="http://localhost:8080/camagru/gallery/account?user_id='.$from['id'].'">'.$from['nickname'].
+			' </a> Leave the comment about your post. <a href="http://localhost:8080/camagru/gallery/showPost?post_id='.$postId.'">Here</a>:<br> '.$mess;
+		$headers  = 'MIME-Version: 1.0' . "\r\n";
+		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+		//$headers .= 'To: '.$to['first_name'].' '.$to['email']."\r\n";
+		//$headers .= 'From: '.$from['nickname'].' '.$from['email']."\r\n";
+		//$headers .= ''.$from['email']."\r\n";
+		//$headers .= ''.$from['email']."\r\n";
+		$res = mail($to['email'], $subject, $message, $headers);
+	}
+
 	public function updateCommentToPost($post, $comment){
     	$user = $this->getUserInfo($_SESSION['user_id']);
     	$res = [];
@@ -71,6 +84,10 @@ class Gallery extends Model{
 			$res['comment'] = $this->db->row("INSERT INTO comments_posts (`post_id`, `user_id`, `nickname`, `comment`) VALUES (:post_id, :user_id, :nickname, :comment)",
 				array('post_id' => $post['id'], 'user_id' => $user['id'], 'nickname' => $user['nickname'], 'comment' => $comment));
 			$res['post_update'] = $this->updatePost($post['id'], array('comment' => 1, 'data' => $count));
+			$to =  $this->getUserInfo($post['user_id']);
+			if ($to['notify'] == 1){
+				$this->sendCommentInEmail($user, $to, $comment, $post['id']);
+			}
 		}
 		return $res;
 	}

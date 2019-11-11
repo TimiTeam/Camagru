@@ -39,7 +39,6 @@
                             <p>'.$post['published'].'</p>
                         </div>
                     </div>
-                <p>'.$post['title'].'</p>
                 <a href="http://localhost:8080/camagru/gallery/showPost?post_id='.$post['id'].'">
                 <img class="img_user" src="/camagru/'.$post['path_photo'].'" > <br>
                 <div class="title_date">
@@ -52,7 +51,7 @@
                         <div class="right_text">
                         <div class="users_likes" id="usr_likes'.$post['id'].'">';
                             foreach ($likes[$post['id']] as $like){
-                                echo '<a href="account?user_id='.$like['user_id'].'">'.$like['nickname'].'</a><br>';
+                                echo '<a href="http://localhost:8080/camagru/gallery/account?user_id='.$like['user_id'].'">'.$like['nickname'].'</a><br>';
                             }
                         echo '</div> <p>';
                             $tag = '<img class="comment_like" src="/camagru/app/res/';
@@ -65,7 +64,7 @@
                             else
                                 $tag .='like.png"';
                             $tag .= '>';
-		                    echo $tag.' <u>Like:</u> <b>'.$post['like'].'</b>
+		                    echo $tag.' <u class="likes" id="likes_'.$post['id'].'">Like:</u> <b>'.$post['like'].'</b>
                             </p>
                         </div>
                     </div>

@@ -56,7 +56,6 @@ class GalleryController extends Controller{
 				$post = $this->model->getCurrentPost($post_id);
 				$url = explode('&', $_SERVER['REQUEST_URI']);
 				header('Location: http://localhost:8080'.$url[0]);
-				m_debug($url);
 				exit;
 			}
             $comments = [];
@@ -71,16 +70,16 @@ class GalleryController extends Controller{
     }
 
     public function accountAction(){
-        $likes = [];
         if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['user_id'])){
             $user_id = htmlentities($_GET['user_id']);
             $user = $this->model->getUserInfo($user_id);
             if ($user != false) {
                 $posts = $this->model->getAllUserPosts($user['nickname']);
+				$posts = array_reverse($posts);
                 $likes = $this->model->getAllLikes($posts);
                 $this->view->render($user['nickname'], array('userInfo' => $user, 'data' => $posts, 'likes' => $likes));
             }
         }
-        exit;
+		exit;
     }
 }

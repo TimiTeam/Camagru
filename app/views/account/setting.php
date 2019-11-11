@@ -12,20 +12,24 @@ else
     <h2>Welcome <?php echo $login ?> </h2>
     <form action="" method="POST">
         <p>First name: <b id="name"> <?php echo $first_name?></b><br>
-        <input type="hidden" id="first_name" name="first_name">
-        <input type="button" name="first_name" value="Edit" onclick="editElement(this, 'name');">
+            <input type="hidden" id="first_name" name="first_name">
+            <input type="button" name="first_name" value="Edit" onclick="editElement(this, 'name');">
         </p>
         <p>Last name: <b id="last"><?php echo $last_name ?></b><br>
-        <input type="hidden" id="last_name" name="last_name">
-        <input type="button" name="last_name" value="Edit" onclick="editElement(this, 'last');">
+            <input type="hidden" id="last_name" name="last_name">
+            <input type="button" name="last_name" value="Edit" onclick="editElement(this, 'last');">
+        </p>
+        <p>Nickname: <b id="nick"><?php echo $nickname ?></b><br>
+            <input type="hidden" id="nickname" name="nickname">
+            <input type="button" name="nickname" value="Edit" onclick="editElement(this, 'nick');">
         </p>
         <p>Email: <b id="email"><?php echo $email?></b><br>
-        <input type="hidden" id="new_email" name="email">
-        <input type="button" name="new_email" value="Edit" onclick="editElement(this, 'email');">
+            <input type="hidden" id="new_email" name="email">
+            <input type="button" name="new_email" value="Edit" onclick="editElement(this, 'email');">
         </p>
         <p>Login: <b id="login"><?php echo $login?></b><br>
-        <input type="hidden" id ="new_login" name="login">
-        <input type="button" name="new_login" value="Edit" onclick="editElement(this, 'login');">
+            <input type="hidden" id ="new_login" name="login">
+            <input type="button" name="new_login" value="Edit" onclick="editElement(this, 'login');">
         </p>
         <p>Notify me by email about commenting my post<br>
     	<?php echo $notify_input ?></p>

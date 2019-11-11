@@ -10,8 +10,9 @@ window.onload = function () {
                     let div = document.getElementById('usr_likes'+id[1]);
                     if (div && div.firstChild){
                         div.style.display = "block";
-                        div.onmouseout = function () {
-                            this.style.display = "none";
+                        console.log("in");
+                        div.onmouseleave = function () {
+                            div.style.display = "none";
                         }
                     }
                 }
@@ -22,7 +23,7 @@ window.onload = function () {
 
 function    updatePost(id, like, status){
     let request = new XMLHttpRequest();
-    request.open("POST", "likePost");
+    request.open("POST", " http://localhost:8080/camagru/gallery/likePost");
     request.onreadystatechange = function() {
         if(this.readyState === 4 && this.status === 200) {
             if (this.responseText == 'ok'){

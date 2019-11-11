@@ -46,9 +46,14 @@ if(isset($data) && isset($data[0])){
                             </p>
                         </div>
                         </a>
-                        <div class="left_text">
+                        <div class="right_text">
+                        <div class="users_likes" id="usr_likes'.$post['id'].'"><p>';
+                            foreach ($likes[$post['id']] as $like){
+                                echo '<a href="account?user_id='.$like['user_id'].'">'.$like['nickname'].'</a><br>';
+                            }
+                        echo '</p></div>
                         <p>';
-                            $tag = "<img class=\"comment_like\" src=\"/camagru/app/res/";
+                             $tag = '<img class="comment_like" src="/camagru/app/res/';
                             if (searchCurrUserLike($likes[$post['id']])){
                                 $tag .= 'like_like.png" onclick="disLikePost(this, '.$post['id'].');"';
                             }
@@ -56,7 +61,7 @@ if(isset($data) && isset($data[0])){
                                 $tag .= 'like.png" onclick="likeThePost(this, '.$post['id'].');"';
                             }
                             $tag.='like.png" >';
-                            echo $tag.' <u>Like:</u> <b>'.$post['like'].'</b>
+                            echo $tag.' <u class="likes" id="likes_'.$post['id'].'">Like:</u> <b>'.$post['like'].'</b>
                             </p>
                         </div>
                 </div>

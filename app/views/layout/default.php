@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="/camagru/app/style/mainStyle.css">
         <link rel="stylesheet" href="/camagru/app/style/photoMakerStyle.css">
         <link rel="stylesheet" href="/camagru/app/style/pst.css">
-        <script src="/camagru/app/scripts/postsWorker.js"></script>
+        <script src="/camagru/app/scripts/posts.js"></script>
         <title><?php echo $title?></title>
     </head>
     <body>

@@ -69,6 +69,12 @@ class Account extends Model{
         return (array('errors_message' => $errors));
     }
 
+    private function updateNickname($id, $newNick){
+    	$this->db->row("UPDATE `likes_posts` SET `nickname` = :newNick WHERE user_id = :id", array('newNick' => $newNick, 'id' => $id));
+		$this->db->row("UPDATE `comments_posts` SET `nickname` = :newNick WHERE user_id = :id", array('newNick' => $newNick, 'id' => $id));
+		$this->db->row("UPDATE `posts` SET `user_name` = :newNick WHERE user_id = :id", array('newNick' => $newNick, 'id' => $id));
+	}
+
     public function changeUserData($user){
         $vars = array ('first_name' => htmlentities($_POST['first_name']),
             'last_name' => htmlentities($_POST['last_name']),
@@ -80,6 +86,7 @@ class Account extends Model{
         $vars = array_diff($vars, array('', NULL, false));
         if (isset($vars['email']) && !filter_var($vars['email'], FILTER_VALIDATE_EMAIL))
             $errors[] = "Wrong email format";
+        $nick = $user['nickname'];
         if (!isset($errors[0])){
             $new_data = $user;
             foreach ($vars as $k => $v){
@@ -89,8 +96,11 @@ class Account extends Model{
                 $new_data['password'] = password_hash($vars['password'], PASSWORD_DEFAULT);
             unset($new_data['verified']);
             unset($new_data['token']);
-            $res = $this->db->row("UPDATE `users` SET `first_name` = :first_name, `last_name` = :last_name, 
+            $res = $this->db->row("UPDATE `users` SET `first_name` = :first_name, `last_name` = :last_name, `nickname` = :nickname, 
             `email` = :email, `login` = :login, `password` =:password, `notify` = :notify WHERE id = :id " , $new_data);
+            if ($new_data['nickname'] != $nick){
+				$this->updateNickname($user['id'], $new_data['nickname']);
+			}
             $_SESSION['user_login'] = $new_data['login'];
             header("Location: http://localhost:8080/camagru/account/setting");
             exit;
