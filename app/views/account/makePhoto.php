@@ -38,11 +38,11 @@ if (!isset($_SESSION['user_in']))
         </div>
         <div class="video_div">
             <div class="main_image">
-                <video id="video" autoplay>
+                <video class="image_src" id="video" autoplay width="640" height="480">
                 </video>
             </div>
             <p>
-                <button class="clasic_button" id="snap" onclick="makePhoto();">Make Phto</button> or
+                <button class="classic_button" id="snap" onclick="makePhoto();">Make Phto</button> or
                 <input name="myFile" type="file" accept=".jpg, .jpeg, .png" onchange="uploadImgOnScreen(this);">
                 <button onclick="clearVideo();">Clear</button>
             </p>
@@ -92,6 +92,8 @@ function uploadImgOnScreen(elem) {
         let image = document.createElement('img');
         image.src = window.URL.createObjectURL(elem.files[0]);
         image.setAttribute('id', "video");
+        image.className = "image_src";
+        image.style.width = "100%";
         let vi = document.getElementById("video");
         let parent = vi.parentNode;
         parent.removeChild(vi);
@@ -108,8 +110,10 @@ function resizeMaskOnScroll(){
   //  if (curScroll > lastScrollTop || curScroll > lastScrollTop) {
     if (curScroll != lastScrollTop || curScroll != lastScrollTop){
         currImg.width += 10;
+        currImg.height += 10;
     } else {
         currImg.width -= 10;
+        currImg.height -= 10;
     }
     lastScrollTop = curScroll <= 0 ? 0 : curScroll;
 }
@@ -118,7 +122,7 @@ window.addEventListener('scroll', resizeMaskOnScroll);
 
 function moveMask(ele){
     ele.onclick = function(e){
-        let newIm = new Image();
+        let newIm = new Image(ele.width, ele.height);
         newIm.src = ele.src;
         let id = newMsk[ele.getAttribute('id')] + 1;
         newIm.className = "mask_on_img";

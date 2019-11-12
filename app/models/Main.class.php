@@ -25,6 +25,12 @@ class Main extends Model{
 		return $likes;
 	}
 
+	public function deletePostAndAllData($postId){
+		$this->db->row("DELETE FROM likes_posts WHERE `post_id` = :post_id", array('post_id' => $postId));
+		$this->db->row("DELETE FROM comments_posts WHERE `post_id` = :post_id", array('post_id' => $postId));
+		$this->db->row("DELETE FROM posts WHERE `id` = :post_id", array('post_id' => $postId));
+	}
+
     public function getUserPosts($id){
         $res = $this->db->row("SELECT * FROM `posts` WHERE `user_id` = :id", array('id' => $id));
         return ($res);

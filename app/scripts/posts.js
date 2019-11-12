@@ -21,6 +21,11 @@ window.onload = function () {
     }
 }
 
+function deletePhoto(elem) {
+    let res =  window.confirm("Doy really want to delete this post?");
+    console.log(res);
+}
+
 function    updatePost(id, like, status){
     let request = new XMLHttpRequest();
     request.open("POST", " http://localhost:8080/camagru/gallery/likePost");

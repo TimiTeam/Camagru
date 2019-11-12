@@ -31,24 +31,29 @@
             foreach($posts as $post){
                 echo '
                 <div class="post_info">
-                    <div class="title_date">
+                     <div class="title_date">
                         <div class="left_text">
+                            <a href="account?user_id='.$post['user_id'].'">
+                                <p></p>
+                            </a>
+                        </div>
+                        <div class="center_text">
                             <p>'.$post['title'].'</p>
                         </div>
-                        <div class="rigth_text">
+                        <div class="right_text">
                             <p>'.$post['published'].'</p>
                         </div>
-                    </div>
-                <a href="http://localhost:8080/camagru/gallery/showPost?post_id='.$post['id'].'">
-                <img class="img_user" src="/camagru/'.$post['path_photo'].'" > <br>
-                <div class="title_date">
-                        <div class="left_text">
+                        </div>
+                    <a href="http://localhost:8080/camagru/gallery/showPost?post_id='.$post['id'].'">
+                    <img alt="image" class="img_user" src="/camagru/'.$post['path_photo'].'" > <br>
+                    <div class="title_date">
+                        <div class="comment">
                             <p>
-                                <img class="comment_like" src="/camagru/app/res/comment.png"><u>Comments:</u> 
+                                <img alt="comment" class="comment_like" src="/camagru/app/res/comment.png"><u>Comments:</u> 
                         </a><b>'.$post['comments'].'</b>
                             </p>
                         </div>
-                        <div class="right_text">
+                        <div class="like">
                         <div class="users_likes" id="usr_likes'.$post['id'].'">';
                             foreach ($likes[$post['id']] as $like){
                                 echo '<a href="http://localhost:8080/camagru/gallery/account?user_id='.$like['user_id'].'">'.$like['nickname'].'</a><br>';
@@ -70,21 +75,49 @@
                     </div>
                     
                 </div>
+                    <p>
+                        <button id="delete" value="'.$post['id'].'" onclick="deletePosts(this);">Delete Post</button>
+                    </p>
+                    <div id="modal'.$post['id'].'" class="confirm_delete">
+                        <p>Do you really want to delete this posts?</p>
+                        <br>
                         <p>
-                        <button id="delete" value="'.$post['id'].'" onclick="deletePhoto(this);">Delete Post</button>
+                            <div class="title_date">
+                                <div class="confirm">
+                                    <form action="#" method="get">
+                                        <input type="hidden" name="postId" value="'.$post['id'].'">
+                                        <button name="confirm" value="yes">Yes, Delete</button>
+                                    </form>
+                                </div>
+                                <div class="cancel">
+                                    <input type="button" name="confirm" value="No, leave" onclick="closeModal('.$post['id'].')">
+                                </div>
+                            </div>
                         </p>
+                    </div>
                 <br>';
             }
             echo '</div>';
         }
         ?>
     </div>
-
     <script>
-        function deletePhoto(elem){
-            console.log(elem);
+        function closeModal(postId) {
+            let modal = document.getElementById("modal"+postId);
+            if (modal)
+                modal.style.display = "none";
         }
-        function    showFullPost(postId){
-            document.location.href = "gallery/showPost?post_id="+postId;
+        function deletePosts(elem) {
+            let modal = document.getElementById("modal"+elem.value);
+            if (modal){/*
+                modal.width = "500px";
+                modal.height = "90px";
+
+                modal.style.width = "500px";
+                modal.style.height = "100px";
+                modal.style.left = (document.documentElement.clientWidth / 2 + window.pageXOffset) + "px";
+                modal.style.top = (document.documentElement.clientHeight / 2  + window.pageYOffset) + "px";*/
+                modal.style.display = "block";
+            }
         }
     </script>

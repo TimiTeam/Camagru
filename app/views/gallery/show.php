@@ -31,21 +31,24 @@ if(isset($data) && isset($data[0])){
                             <p>'.$post['user_name'].'</p>
                         </a>
                     </div>
-                    <div class="rigth_text">
+                    <div class="center_text">
+                        <p>'.$post['title'].'</p>
+                    </div>
+                    <div class="right_text">
                         <p>'.$post['published'].'</p>
                     </div>
                 </div>
-                <p>'.$post['title'].'</p>
                 <a href="http://localhost:8080/camagru/gallery/showPost?post_id='.$post['id'].'">
                 <img class="img_user" src="/camagru/'.$post['path_photo'].'" > <br>
                 <div class="title_date">
-                        <div class="left_text">
+                        <div class="comment">
                             <p>
                                 <img class="comment_like" src="/camagru/app/res/comment.png"><u>Comments:</u> 
-                        </a><b>'.$post['comments'].'</b>
+                            </a>
+                                <b>'.$post['comments'].'</b>
                             </p>
                         </div>
-                        <div class="right_text">
+                        <div class="like">
                         <div class="users_likes" id="usr_likes'.$post['id'].'">';
                             foreach ($likes[$post['id']] as $like){
                                 echo '<a href="account?user_id='.$like['user_id'].'">'.$like['nickname'].'</a><br>';
@@ -69,7 +72,10 @@ if(isset($data) && isset($data[0])){
 	}
 	echo '</div>';
 }
+else if (isset($data)){
+    echo '<h2>No result</h2>';
+}
 else
-	echo '<h3>Ther will be all users posts</h3>';
+	echo '<h3>Their will be all users posts</h3>';
 ?>
 </div>

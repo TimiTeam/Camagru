@@ -26,28 +26,31 @@ if(isset($data) && isset($data[0])){
     foreach($data as $post){
         echo '
             <div class="post_info">
-                <div class="title_date">
+                 <div class="title_date">
                     <div class="left_text">
                         <a href="account?user_id='.$post['user_id'].'">
                             <p>'.$post['user_name'].'</p>
                         </a>
                     </div>
-                    <div class="rigth_text">
+                    <div class="center_text">
+                        <p>'.$post['title'].'</p>
+                    </div>
+                    <div class="right_text">
                         <p>'.$post['published'].'</p>
                     </div>
                 </div>
-                <p>'.$post['title'].'</p>
                 <a href="http://localhost:8080/camagru/gallery/showPost?post_id='.$post['id'].'">
                 <img class="img_user" src="/camagru/'.$post['path_photo'].'" > <br>
                 <div class="title_date">
-                        <div class="left_text">
+                        <div class="comment">
                             <p>
-                                <img class="comment_like" src="/camagru/app/res/comment.png"><u>Comments:</u> <b>'.$post['comments'].'</b>
+                                <img class="comment_like" src="/camagru/app/res/comment.png"><u>Comments:</u> 
+                            </a>
+                                <b>'.$post['comments'].'</b>
                             </p>
                         </div>
-                        </a>
-                        <div class="right_text">
-                        <div class="users_likes" id="usr_likes'.$post['id'].'"><p>';
+                        <div class="like">
+                        <div class="users_likes" id="usr_likes'.$post['id'].'">';
                             foreach ($likes[$post['id']] as $like){
                                 echo '<a href="account?user_id='.$like['user_id'].'">'.$like['nickname'].'</a><br>';
                             }

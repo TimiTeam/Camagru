@@ -14,25 +14,27 @@ function searchCurrUserLike($likesArray){
 
 echo '<div class="user_photo">
             <div class="post_info">
-                <div class="title_date">
+                 <div class="title_date">
                     <div class="left_text">
                         <a href="account?user_id='.$post['user_id'].'">
                             <p>'.$post['user_name'].'</p>
                         </a>
                     </div>
+                    <div class="center_text">
+                        <p>'.$post['title'].'</p>
+                    </div>
                     <div class="right_text">
                         <p>'.$post['published'].'</p>
                     </div>
                 </div>
-                <p>'.$post['title'].'</p>
                 <img class="img_user" src="/camagru/'.$post['path_photo'].'" > <br>
                 <div class="title_date">
-                        <div class="left_text">
+                        <div class="comment">
                             <p>
                                 <img class="comment_like" src="/camagru/app/res/comment.png"><u>Comments:</u> <b>'.$post['comments'].'</b>
                             </p>
                         </div>
-                        <div class="right_text">
+                        <div class="like">
                         <div class="users_likes" id="usr_likes'.$post['id'].'"><p>';
                             foreach ($likes as $like){
                                 echo '<a href="account?user_id='.$like['user_id'].'">'.$like['nickname'].'</a><br>';
