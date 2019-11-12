@@ -16,7 +16,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" href="/camagru/app/style/mainStyle.css">
+        <link rel="stylesheet" href="/camagru/app/style/camagruStyle.css">
         <link rel="stylesheet" href="/camagru/app/style/photoStyle.css">
         <link rel="stylesheet" href="/camagru/app/style/postsStyle.css">
         <script src="/camagru/app/scripts/posts.js"></script>
@@ -25,8 +25,12 @@
     <body>
     <header>
     <div class="hor_list">
+        <a href="http://localhost:8080/camagru/">
+            <img class="logo" src="/camagru/app/res/camagru.png" width="256" >
+        </a>
         <ul class="hr">
-            <a href="http://localhost:8080/camagru/"><li>Main Page </li></a>
+            <a href="http://localhost:8080/camagru/"><li>Main Page </li>
+            </a>
             <a href="http://localhost:8080/camagru/gallery/show"><li>Gallery</li></a>
             <a href="http://localhost:8080/camagru/account/makePhoto"><li>Make Photo</li></a>
             <?php

@@ -8,7 +8,6 @@ use app\core\Controller;
 class AccountController extends Controller{
 
     public function loginAction($param = []){
-        $this->view->layout = 'custom'; 
         if ($_SERVER['REQUEST_METHOD'] == 'POST')
             $param = $this->model->login();
         $this->view->render("Login", $param);
