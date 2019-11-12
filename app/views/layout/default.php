@@ -4,11 +4,9 @@
             'LogIn' => '<a href="http://localhost:8080/camagru/account/logout"><li>Sign out</li></a>');
     }
     else{
-        $dt = array ('Register' =>'<a href="http://localhost:8080/camagru/account/register"><li>Registration</li>',
-            'LogIn' => '<a href="http://localhost:8080/camagru/account/login"><li>Sign in</li></a>');
+        $dt = array ('Register' =>'<a href="/camagru/account/register"><li>Registration</li>',
+            'LogIn' => '<a href="/camagru/account/login"><li>Sign in</li></a>');
     }
-
-
     ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -25,14 +23,14 @@
     <body>
     <header>
     <div class="hor_list">
-        <a href="http://localhost:8080/camagru/">
+        <a href="/camagru/">
             <img class="logo" src="/camagru/app/res/camagru.png" width="256" >
         </a>
         <ul class="hr">
-            <a href="http://localhost:8080/camagru/"><li>Main Page </li>
+            <a href="/camagru/"><li>Main Page </li>
             </a>
-            <a href="http://localhost:8080/camagru/gallery/show"><li>Gallery</li></a>
-            <a href="http://localhost:8080/camagru/account/makePhoto"><li>Make Photo</li></a>
+            <a href="/camagru/gallery/show"><li>Gallery</li></a>
+            <a href="/camagru/account/makePhoto"><li>Make Photo</li></a>
             <?php
                 foreach($dt as $d)
                     echo $d;
