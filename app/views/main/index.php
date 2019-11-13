@@ -12,9 +12,11 @@
 		return false;
 	}
     if (!isset($_SESSION['user_in'])){
-        echo '<h3>Welcome is camagru</h3>
-        <p>Here You can select an image in a list of superimposable images take a picture with his/her webcam and admire the result that should be mixing
-        both pictures.
+        echo '<div class="welcome">
+            <p>Welcome is Camagru</p>
+        </div>
+        <p>Here You can select an image in a list of superimposable images take a picture with your webcam or load from device
+        and admire the result that will be mixing both pictures.
         <p>You ready to make you super Photo?</p>
         <a href="http://localhost:8080/camagru/account/login">Sign in!</a>
         <p>Or if you dont have <b>account</b> <br> Just a click in:</p>

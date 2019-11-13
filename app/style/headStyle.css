@@ -1,0 +1,156 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+
+html{
+   height:100%;
+}
+
+body{
+    min-height: 100%;
+}
+
+p {
+    line-height: 2;
+    font-size: 110%;
+}
+
+.welcome{
+    width: 100%;
+    padding-left: 3%;
+    font-size: 140%;
+}
+
+.hor_list{
+    width: 60%;
+    margin-left: 20%;
+    display: inline-flex;
+    margin-top: 2%;
+    margin-bottom: 5%;
+}
+
+.logo_div{
+    margin-top: 1%;
+    width: 35%;
+}
+
+.logo{
+    border-radius: 30%;
+    width: 100%;
+}
+
+.logo:hover{
+    margin: -2px;
+    border: 2px double coral;
+}
+
+.hr{
+    padding: 3%;
+    width: 65%;
+}
+ul.hr li {
+    display: inline;
+    margin: 1%;
+    width: 5%;
+    background: lightcoral;
+    border: 1px solid salmon;
+    border-radius: 5%;
+    font-size: 120%;
+    font-family: Arial, "Apple Braille", monospace;
+    color: white;
+    padding: 1%;
+    text-shadow: 3px 0px 1px rgba(200,180,180,100);
+}
+
+ul.hr li:hover{
+    background: lemonchiffon;
+    color: red;
+    text-shadow: none;
+}
+a{
+    text-decoration: none;
+}
+a:active{
+    color: darkviolet;
+}
+
+.login_form{
+}
+
+table{
+    width: 100%;
+}
+
+input{
+    width: 36%;
+    font-size: 100%;
+}
+
+.row{
+    width: 100%;
+}
+
+.name{
+    text-align: right;
+    padding-right: 5%;
+    font-family: "Apple SD Gothic Neo";
+    font-size: 120%;
+}
+
+.data{
+    text-align: left;
+    width: 64%;
+    text-decoration-color: blue;
+}
+
+.simple_button{
+    min-width: max-content;
+    width: 12%;
+    height: 5%;
+    padding: 0.5%;
+    background: lightseagreen;
+    font-family: "Arial Narrow";
+    font-weight: 600;
+    color: white;
+    text-shadow: 1px 2px 1px blueviolet;
+    border: 2px solid blueviolet;
+    border-radius: 5%;
+    font-size: 100%;
+}
+
+.simple_button:hover{
+    box-shadow: 2px 3px 4px rgba(196, 0, 255, 0.2),
+    -2px 3px 4px rgba(196, 0, 255, 0.2),
+    0px -3px 4px rgba(196, 0, 255, 0.2);
+}

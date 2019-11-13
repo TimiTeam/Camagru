@@ -14,18 +14,22 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" href="/camagru/app/style/camagruStyle.css">
+        <link rel="stylesheet" href="/camagru/app/style/headStyle.css">
         <link rel="stylesheet" href="/camagru/app/style/photoStyle.css">
         <link rel="stylesheet" href="/camagru/app/style/postsStyle.css">
-        <script src="/camagru/app/scripts/posts.js"></script>
-        <title><?php echo $title?></title>
+
+        <script  type="text/javascript" src="/camagru/app/scripts/registerJs.js"></script>
+        <script  type="text/javascript" src="/camagru/app/scripts/posts.js"></script>
+        <title><?php if (isset($title)) echo $title?></title>
     </head>
     <body>
     <header>
     <div class="hor_list">
-        <a href="/camagru/">
-            <img class="logo" src="/camagru/app/res/camagru.png" width="256" >
-        </a>
+        <div class="logo_div">
+            <a href="/camagru/">
+                <img class="logo" src="/camagru/app/res/camagru.png">
+            </a>
+        </div>
         <ul class="hr">
             <a href="/camagru/"><li>Main Page </li>
             </a>

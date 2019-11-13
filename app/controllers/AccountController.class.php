@@ -88,13 +88,9 @@ class AccountController extends Controller{
     }
 
     public function resetAction($param = []){
-        $input = '<p> Login <br>
-        <input type="text" name="login" required>
-    </p>
-    <p> Email <br>
-        <input type="email" name="email" required>
-    </p>
-    <p>';
+        $param['getData'] = true;
+		$param['newPassword'] = false;
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email']) && isset($_POST['login'])){
             if (($email = htmlentities($_POST['email'])) && ($login = htmlentities($_POST['login']))){
                 if ($this->model->confirmEmailAndLogin($email, $login)){
@@ -115,17 +111,11 @@ class AccountController extends Controller{
             header("Location: http://localhost:8080/camagru/account/login");
             exit;
         }
-        if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['reset_token']) && isset($_GET['email']) && $_GET['reset_token'] == $_SESSION['reset_token']){
+        if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['reset_token']) && isset($_SESSION['reset_token']) && $_GET['reset_token'] == $_SESSION['reset_token']){
             unset($_SESSION['reset_token']);
-            $input = '<p> New password <br>
-        <input type="password" name="password" required>
-    </p>
-    <p> Confirm  <br>
-        <input type="password" name="confirm" required>
-    </p>
-    <p>';
+			$param['getData'] = false;
+			$param['newPassword'] = true;
         }
-        $param['data'] = $input;
         $this->view->render("Reset", $param);
     }
 
