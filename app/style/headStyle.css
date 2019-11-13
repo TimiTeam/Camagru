@@ -52,6 +52,12 @@ p {
     font-size: 140%;
 }
 
+.user_name{
+    font-family: "American Typewriter";
+    font-size: 145%;
+    font-style: oblique;
+}
+
 .hor_list{
     width: 60%;
     margin-left: 20%;
@@ -136,7 +142,7 @@ input{
 
 .simple_button{
     min-width: max-content;
-    width: 12%;
+    width: 14%;
     height: 5%;
     padding: 0.5%;
     background: lightseagreen;

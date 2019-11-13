@@ -31,7 +31,17 @@
                             <p></p>
                         </td>
                         <td class="data">
-                            <a href="http://localhost:8080/camagru/account/reset">Forgot password?</a>
+                            <p>
+                                <a href="/camagru/account/reset">Forgot password?</a>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="name">
+                            <p></p>
+                        </td>
+                        <td class="data">
+                            <a href="/camagru/account/register">Don't have account?</a>
                         </td>
                     </tr>
                     <tr>
@@ -47,7 +57,9 @@
                             <p></p>
                         </td>
                         <td class="data">
-                            <button class="simple_button">Sign in </button>
+                            <p>
+                                <button class="simple_button">Sign in </button>
+                            </p>
                         </td>
                     </tr>
 

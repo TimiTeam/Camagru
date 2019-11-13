@@ -55,7 +55,7 @@
                 <p></p>
             </td>
             <td class="data">
-                <button>Reset</button>
+                <button class="simple_button">Reset</button>
             </td>
         </tr>
     </table>

@@ -17,9 +17,9 @@ return [
 		'controller' => 'account',
 		'action' => 'logout'
 	],
-	'camagru/account/setting' => [
+	'camagru/account/settings' => [
 		'controller' => 'account',
-		'action' => 'setting'
+		'action' => 'settings'
 	],
 	'camagru/account/validData' => [
 		'controller' => 'account',

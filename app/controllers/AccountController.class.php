@@ -46,7 +46,7 @@ class AccountController extends Controller{
         header("Location: http://localhost:8080/camagru/");
         exit;
     }
-    public function settingAction($param = []){
+    public function settingsAction($param = []){
         if (!isset($_SESSION['user_in']))
             header("Location: http://localhost:8080/camagru/");
         $user = $this->model->getCurrentUser($_SESSION['user_id']);

@@ -23,11 +23,50 @@
         <a href="http://localhost:8080/camagru/account/register">Create you own account</a>';
     }
     else if ($user)
-        echo '<h3>Hello '.$user['first_name'].' '.$user['last_name'].'</h3>
+        echo '<div class="welcome">
+                <p> Hello <b class="user_name">'.$user['first_name'].' '.$user['last_name'].'</b></p>
+             </div>
+             <table>
+                 <tr>
+                     <td>
+                         <p>At this time you have </p>
+                     </td>
+                 </tr>
+                 <tr>
+                     <td>
+                         <p>Posts</p>
+                 </td>
+                     <td>
+                         <p>15</p>
+                     </td>
+                 </tr>        
+                 <tr>
+                     <td>
+                         <p>Comments</p>
+                 </td>
+                     <td>
+                         <p>32</p>
+                     </td>
+                 </tr>
+                 <tr>
+                     <td>
+                         <p>Likes</p>
+                 </td>
+                     <td>
+                         <p>357</p>
+                     </td>
+                 </tr>
+             </table>
         <p>You can create a new photo with a many different mask and publish it\'s.<br>
         The users can see your photos but only a connected user can like and/or comment your posts.</p>
         <a href="http://localhost:8080/camagru/account/makePhoto"><b>Make Photo</b>!</a>
-        <p>Your posts </p>';
+        <div class="account_settings">
+        <br>    
+            <a href="/camagru/account/settings">
+                <button class="simple_button">Account Settings</button>
+            </a>
+        </div>
+        <p style="text-align: center">Your posts </p> <br>';
         if (isset($posts)){
             echo '<div class="user_photo">';
             foreach($posts as $post){
@@ -46,7 +85,7 @@
                             <p>'.$post['published'].'</p>
                         </div>
                         </div>
-                    <a href="http://localhost:8080/camagru/gallery/showPost?post_id='.$post['id'].'">
+                    <a href="/camagru/gallery/showPost?post_id='.$post['id'].'">
                     <img alt="image" class="img_user" src="/camagru/'.$post['path_photo'].'" > <br>
                     <div class="title_date">
                         <div class="comment">
@@ -58,7 +97,7 @@
                         <div class="like">
                         <div class="users_likes" id="usr_likes'.$post['id'].'">';
                             foreach ($likes[$post['id']] as $like){
-                                echo '<a href="http://localhost:8080/camagru/gallery/account?user_id='.$like['user_id'].'">'.$like['nickname'].'</a><br>';
+                                echo '<a href="/camagru/gallery/account?user_id='.$like['user_id'].'">'.$like['nickname'].'</a><br>';
                             }
                         echo '</div> <p>';
                             $tag = '<img class="comment_like" src="/camagru/app/res/';

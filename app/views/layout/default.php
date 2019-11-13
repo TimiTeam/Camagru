@@ -1,7 +1,7 @@
 <?php
     if (isset($_SESSION['user_in'])){
-        $dt = array ('Register' =>'<a href="http://localhost:8080/camagru/account/setting"><li>Account Settings</li>',
-            'LogIn' => '<a href="http://localhost:8080/camagru/account/logout"><li>Sign out</li></a>');
+        $dt = array ('Register' =>'<a href="/camagru/account/makePhoto"><li>Make Photo</li>',
+            'LogIn' => '<a href="/camagru/account/logout"><li>Sign out</li></a>');
     }
     else{
         $dt = array ('Register' =>'<a href="/camagru/account/register"><li>Registration</li>',
@@ -34,7 +34,6 @@
             <a href="/camagru/"><li>Main Page </li>
             </a>
             <a href="/camagru/gallery/show"><li>Gallery</li></a>
-            <a href="/camagru/account/makePhoto"><li>Make Photo</li></a>
             <?php
                 foreach($dt as $d)
                     echo $d;
@@ -49,9 +48,8 @@
     <footer>
     <div class="hor_list">
         <ul class="hr">
-            <a href="http://localhost:8080/camagru/"><li>Main Page </li></a>
-            <a href="http://localhost:8080/camagru/gallery/show"><li>Gallery</li></a>
-            <a href="http://localhost:8080/camagru/account/makePhoto"><li>Make Photo</li></a>
+            <a href="/camagru/"><li>Main Page </li></a>
+            <a href="/camagru/gallery/show"><li>Gallery</li></a>
             <?php
                 foreach($dt as $d)
                     echo $d;
