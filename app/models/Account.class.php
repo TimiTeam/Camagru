@@ -102,8 +102,7 @@ class Account extends Model{
 				$this->updateNickname($user['id'], $new_data['nickname']);
 			}
             $_SESSION['user_login'] = $new_data['login'];
-            header("Location: http://localhost:8080/camagru/account/setting");
-            exit;
+            return $new_data;
         }
     }
 

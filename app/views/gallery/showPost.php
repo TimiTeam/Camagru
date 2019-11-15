@@ -56,12 +56,12 @@ echo '<div class="user_photo">
                 <div class="comments">';
                 	foreach ($comments as $comment){
                 		echo '<div class="one_comment">
-								<div class="left_text">
+								<div class="user_com">
 									<a href="account?user_id='.$comment['user_id'].'">
                             			<b>'.$comment['nickname'].'</b>
                         			</a>
                         		</div>
-                        		<div class="comment_data">
+                        		<div class="user_com_data">
                         			<p>'.$comment['comment'].'</p>	
 								</div>
 							</div>';

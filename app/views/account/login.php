@@ -10,7 +10,7 @@
                             <p style="color:red;"><?php if (isset($message)) echo $message; else echo '' ?></p>
                         </td>
                     </tr>
-                    <tr class="row">
+                    <tr>
                         <td class="name">
                             <p>Login</p>
                         </td>

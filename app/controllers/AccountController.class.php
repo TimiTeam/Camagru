@@ -29,8 +29,8 @@ class AccountController extends Controller{
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (isset($_POST['posted_image']) && $this->model->makeImage()) {
-                echo 'http://localhost:8080/camagru/gallery/show';
-                exit;
+               echo '/camagru/gallery/show';
+               exit;
             }
             echo 'error';
         }
@@ -49,11 +49,11 @@ class AccountController extends Controller{
     public function settingsAction($param = []){
         if (!isset($_SESSION['user_in']))
             header("Location: http://localhost:8080/camagru/");
-        $user = $this->model->getCurrentUser($_SESSION['user_id']);
+		$param = $this->model->getCurrentUser($_SESSION['user_id']);
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $param = $this->model->changeUserData($user);
+            $param = $this->model->changeUserData($param);
         }
-        $this->view->render($user['login']."Account", $user);
+        $this->view->render($param['login']."Account", $param);
     }
     
     public function validDataAction(){

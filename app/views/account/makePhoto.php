@@ -82,6 +82,7 @@ function clearVideo(){
     var masksArray = document.querySelectorAll(".mask_on_img");
     if (masksArray.lenght <= 0)
         return ;
+    drawImg = 0;
     masksArray.forEach(function(masksArray){
         masksArray.parentNode.removeChild(masksArray);
     });
@@ -230,7 +231,7 @@ function  saveImage(){
             if (this.responseText == "error"){
                 alert("Some error, ty again");
             }
-            document.location.href = this.responseText.replace(/\n|\r/g, "");
+                document.location.href = this.responseText.replace(/\n|\r/g, "");
         }
     };
     var formData = new FormData();

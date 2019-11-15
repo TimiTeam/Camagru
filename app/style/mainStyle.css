@@ -60,9 +60,12 @@ p {
 
 .hor_list{
     width: 60%;
+    padding: 1%;
     margin-left: 20%;
     display: inline-flex;
     margin-top: 2%;
+    border-radius: 10px;
+    background-color: #343a40;
     margin-bottom: 5%;
 }
 
@@ -74,11 +77,12 @@ p {
 .logo{
     border-radius: 30%;
     width: 100%;
+    padding: 2px;
 }
 
 .logo:hover{
-    margin: -2px;
     border: 2px double coral;
+    padding: 0px;
 }
 
 .hr{
