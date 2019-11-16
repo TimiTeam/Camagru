@@ -21,7 +21,6 @@ else if($notify == 1)
                         </div>';
 ?>
 <div class="main_panel">
-    <h2>Welcome <?php echo $login ?> </h2>
     <form action="" method="POST">
         <p>First name: <b id="name"> <?php echo $first_name?></b><br>
             <input type="hidden" id="first_name" name="first_name">

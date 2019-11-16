@@ -16,7 +16,7 @@ body {
 
 div.cont{
     width: 100%;
-    min-width: 500px;
+    min-width: 300px;
     display: inline-flex;
     border: 2px dashed blueviolet;
 }
@@ -89,13 +89,14 @@ img.render:hover {
 .modal {
     display: none;
     position: absolute;
-    background-color: rgb(0,0,0);
-    background-color: rgba(180, 180, 255, 0.92);
+    margin-left: 20%;
+    margin-top: 5%;
+    background-color: rgba(150, 150, 180, 0.85);
     overflow: auto;
     z-index: 1000;
-    width: 50%;
-    margin-left: 5%;
-    border-radius: 1%;
+    width: 60%;
+    height: auto;
+    padding: 1%;
 }
 
 .title{
@@ -108,15 +109,32 @@ img.render:hover {
 
 .img_modal{
     border-radius: 2%;
-    width: 70%;
+    width: 80%;
     height: auto;
-    border: 1px dashed black;
+    padding: 2%;
+    margin: 1%;
+    background: #dddddd;
 }
 
 .modal-content {
     text-align: center;
     animation-name: animate;
+    background-color: rgba(150, 150, 180, 0.1);
+
+    overflow: auto;
     animation-duration: 0.5s
+}
+
+.my-modal-footer{
+    text-align: center;
+    padding: 1%;
+}
+
+.modal-title{
+    padding-top: 2%;
+    font-size: 125%;
+    font-family: "Apple SD Gothic Neo";
+    color: black;
 }
 
 .close {

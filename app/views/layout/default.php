@@ -14,10 +14,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" href="/camagru/app/style/mainStyle.css">
-        <link rel="stylesheet" href="/camagru/app/style/photoStyle.css">
-        <link rel="stylesheet" href="/camagru/app/style/showStyle.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="/camagru/app/style/camagru.css">
+        <link rel="stylesheet" href="/camagru/app/style/photo.css">
+        <link rel="stylesheet" href="/camagru/app/style/show.css">
 
         <script  type="text/javascript" src="/camagru/app/scripts/registerJs.js"></script>
         <script  type="text/javascript" src="/camagru/app/scripts/posts.js"></script>

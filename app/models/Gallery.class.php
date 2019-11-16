@@ -6,9 +6,19 @@ use app\core\Model;
 
 class Gallery extends Model{
     public function showAllPosts(){
-        $res = $this->db->row("SELECT * FROM `posts` ORDER BY id");
+        $res = $this->db->row("SELECT * FROM `posts` ORDER BY `published`");
         return ($res);
     }
+
+    public function getAllPostsByLikes(){
+		$res = $this->db->row("SELECT * FROM `posts` ORDER BY `like`");
+		return ($res);
+	}
+
+	public function getAllUserPostsByLikes($nickname){
+		$res = $this->db->row("SELECT * FROM `posts` WHERE `user_name` = :id  ORDER BY `like`", array('id' => $nickname));
+		return ($res);
+	}
 
     public function deleteLine($posId, $user){
         $res = $this->db->row( 'DELETE FROM `likes_posts` WHERE `user_id` = :user_id AND `post_id` = :post_id;', array('user_id' => $user['id'], 'post_id' => $posId));

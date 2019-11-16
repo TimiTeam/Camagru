@@ -10,7 +10,6 @@ window.onload = function () {
                     let div = document.getElementById('usr_likes'+id[1]);
                     if (div && div.firstChild){
                         div.style.display = "block";
-                        console.log("in");
                         div.onmouseleave = function () {
                             div.style.display = "none";
                         }

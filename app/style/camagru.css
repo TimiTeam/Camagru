@@ -87,6 +87,7 @@ p {
 
 .hr{
     padding: 3%;
+    padding-top: 5%;
     width: 65%;
 }
 ul.hr li {
@@ -157,6 +158,41 @@ input{
     border: 2px solid blueviolet;
     border-radius: 5%;
     font-size: 100%;
+}
+
+.status-div{
+    border: 2px solid green;
+    border-radius: 5px;
+    padding: 2%;
+    width: 100%;
+    height: 100px;
+    font-size: 120%;
+    text-align: center;
+    color: #dddddd;
+    background: #343a40;
+}
+
+.searchBy{
+    display: -moz-inline-block;
+    width: 100%;
+    margin-top: 1%;
+    padding: 1%;
+    border: 1px solid black;
+}
+
+.input_nickname{
+    margin-right: -30%;
+    display: inline-flex;
+}
+
+.select_sort{
+    margin-right: 2%;
+    display: inline-flex;
+}
+
+.title_filer{
+    display: inline-flex;
+    margin-right: 2%;
 }
 
 .simple_button:hover{

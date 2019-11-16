@@ -5,22 +5,24 @@ if (!isset($_SESSION['user_in']))
 <div class="main_panel">
     <div class="modal" id="modal">
         <div class="modal-content">
-            <div class="modal-header-footer" >
-                <span class="close" onclick="closePostWind();">×</span>
-                <h2>Post this image?</h2>
+            <div class="modal-title">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close" onclick="closePostWind();">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5  id="exampleModalLabel">Post this image?</h5>
             </div>
-            <div class="modal-body">
-                <p >Title
-                    <input class="title" type="text" id="post_title" name="title" required ><br>
+            <div ">
+                <p>Title
+                    <input class="title" type="text" id="post_title" name="title" required maxlength="150">><br>
                 </p>
                 <p>
                     <img class="img_modal" id="posting_image">
                 </p>
             </div>
-            <div class="modal-header-footer">
+            <div class="my-modal-footer">
                 <p class="buttons">
-                    <button id="close" onclick="closePostWind();">Cancel</button>
-                    <button id="post">Post</button>
+                    <button id="close" onclick="closePostWind();" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button id="post" class="btn btn-primary">Post</button>
                 <p>
             </div>
         </div>
@@ -168,6 +170,8 @@ function loadImg(elem){
     {
         document.getElementById("posting_image").setAttribute("src", elem.src);
         document.getElementById("modal").style.display = "block";
+
+        console.log(document.getElementById("modal"));
     }
 }
 

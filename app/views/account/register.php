@@ -82,7 +82,7 @@
                     <p><br></p>
                 </td>
                 <td class="data">
-                    <button id="registerBtn" class="simple_button">Check-in </button>
+                    <button id="registerBtn" class="btn btn-success">Check-in </button>
                 </td>
             </tr>
         </table>

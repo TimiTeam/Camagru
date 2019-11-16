@@ -1,12 +1,26 @@
 
 <div class="main_panel">
     <h2> Gallery</h2>
-    <form action="" method="get">
-        <p>Search by nickname
-        <input type="text" name="nickname">
-        <button>Search</button>
-        </p>
-    </form>
+    <div class="searchBy">
+        <form action="" method="get">
+            <div class="title_filer">
+                <p>Filter by nickname</p>
+            </div>
+            <div class="input_nickname">
+                <input type="text" size="80" name="nickname">
+            </div>
+            <div class="select_sort">
+                <select size="1" name="sort">
+                    <option disabled>Sorting by</option>
+                    <option value="like_more">More like</option>
+                    <option value="like_less">Less like</option>
+                    <option selected value="new">New</option>
+                    <option value="older">Older</option>
+                </select>
+            </div>
+            <button>Search</button>
+        </form>
+    </div>
 <?php
 
 function searchCurrUserLike($likesArray){

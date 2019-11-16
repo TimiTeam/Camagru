@@ -9,14 +9,22 @@ class GalleryController extends Controller{
     public function showAction(){
         $res = [];
         $likes = [];
-        if (isset($_GET['nickname'])){
+        if (!isset($_GET['sort']))
+			$_GET['sort'] = 'new';
+        if (isset($_GET['nickname']) && strlen($_GET['nickname']) > 0){
             $nickname = htmlentities($_GET['nickname']);
-            $res = $this->model->getAllUserPosts($nickname);
+			if (isset($_GET['sort']) && stristr($_GET['sort'], 'like') !== false)
+            	$res = $this->model->getAllUserPostsByLikes($nickname);
+			else
+				$res = $this->model->getAllUserPosts($nickname);
         }
+        else if (isset($_GET['sort']) && stristr($_GET['sort'], 'like') !== false)
+            $res = $this->model->getAllPostsByLikes();
         else
-            $res = $this->model->showAllPosts();
+			$res = $this->model->showAllPosts();
         if ($res) {
-            $res = array_reverse($res);
+        	if (isset($_GET['sort']) && $_GET['sort'] == 'new' || (isset($_GET['sort'])  && $_GET['sort'] == 'like_more'))
+				$res = array_reverse($res);
             $likes = $this->model->getAllLikes($res);
         }
         $this->view->render("Gallery", array('data' => $res, 'likes' => $likes));

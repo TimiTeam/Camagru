@@ -19,9 +19,9 @@
         <p>Here You can select an image in a list of superimposable images take a picture with your webcam or load from device
         and admire the result that will be mixing both pictures.
         <p>You ready to make you super Photo?</p>
-        <a href="http://localhost:8080/camagru/account/login">Sign in!</a>
+        <a href="http://localhost:8080/camagru/account/login" class="btn btn-success">Sign in!</a>
         <p>Or if you dont have <b>account</b> <br> Just a click in:</p>
-        <a href="http://localhost:8080/camagru/account/register">Create you own account</a>';
+        <a href="http://localhost:8080/camagru/account/register" class="btn btn-success">Create account</a>';
 	} else if ($user)
 		echo '<div class="welcome">
                 <p> Hello <b class="user_name">' . $user['first_name'] . ' ' . $user['last_name'] . '</b></p>
@@ -29,7 +29,7 @@
               <div class="account_settings">
         <br>
             <a href="/camagru/account/settings">
-                <button class="btn btn-primary btn-lg disabled">Account Settings</button>
+                <button class="btn btn-secondary">Account Settings</button>
             </a>
             </p>
             
@@ -48,18 +48,19 @@
                      <td>' . $user_posts . '</td>
                  </tr>
                  <tr>
-                     <th scope="row">Likes in your posts</th>
+                     <th scope="row">Likes to your posts</th>
                      <td>' . $likesToUser . '</td>
                  </tr>
                  <tr>
-                     <th scope="row">Comments from your posts</th>
+                     <th scope="row">Comments to your posts</th>
                      <td>' . $commentsToUser . '</td>
                  </tr>
              </tbody>
              </table>
             
-              <button type="button" class="btn btn-info" onclick="showAllLikedPosts(this);">Posts that you like: ' . $userLikesPostsCount . '</button>
-              <div id="preview_posts" class="block_preview_posts">';
+              <button type="button" class="btn btn-secondary" onclick="showAllLikedPosts(this);">Posts that you like: ' . $userLikesPostsCount . '</button><br>
+              
+              <div id="preview_posts" class="block_preview_posts"><br>';
 
 	if (isset($userLikesPosts)) {
 		foreach ($userLikesPosts as $post) {
@@ -79,10 +80,10 @@
               </div>';
 		}
 	}
-	echo '</div>
+	echo '<br></div><br>
         <p>You can create a new photo with a many different mask and publish it\'s.<br>
         The users can see your photos but only a connected user can like and/or comment your posts.</p>
-        <a href="http://localhost:8080/camagru/account/makePhoto"><b>Make Photo</b>!</a>
+        <a href="http://localhost:8080/camagru/account/makePhoto" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Make More Photo</a>
         
         <p style="text-align: center">Your posts </p> <br>';
 	if (isset($posts)) {
@@ -133,7 +134,7 @@
                     
                 </div>
                     <p>
-                        <button id="delete" value="' . $post['id'] . '" onclick="deletePosts(this);">Delete Post</button>
+                        <button id="delete" value="' . $post['id'] . '" class="btn btn-outline-danger" onclick="deletePosts(this);">Delete Post</button>
                     </p>
                     <div id="modal' . $post['id'] . '" class="confirm_delete">
                         <p>Do you really want to delete this posts?</p>

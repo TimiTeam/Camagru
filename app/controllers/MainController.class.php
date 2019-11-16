@@ -24,13 +24,13 @@ class MainController extends Controller{
             if ($posts) {
 				$param['likes'] = $this->model->getAllLikes($posts);;
 				$param['posts'] = array_reverse($posts);
-				$param['user_posts'] = count($posts);
-				$ret = $this->model->getAllLikesAndCommentsCountToUser($posts);
-				$param['likesToUser'] = $ret['allLikes'];
-				$param['commentsToUser'] = $ret['allComments'];
-				$param['userLikesPosts'] = $this->model->getUserLikesPosts($user['id']);
-				$param['userLikesPostsCount'] = count($param['userLikesPosts']);
 			}
+			$param['user_posts'] = count($posts);
+            $ret = $this->model->getAllLikesAndCommentsCountToUser($posts);
+			$param['likesToUser'] = $ret['allLikes'];
+			$param['commentsToUser'] = $ret['allComments'];
+			$param['userLikesPosts'] = $this->model->getUserLikesPosts($user['id']);
+			$param['userLikesPostsCount'] = count($param['userLikesPosts']);
         }
         $this->view->render("Home", $param);
     }

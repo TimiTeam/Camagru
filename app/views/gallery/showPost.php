@@ -72,8 +72,8 @@ echo '<div class="user_photo">
 						<input type="hidden" name="post_id" value="'.$post['id'].'">
 						<textarea rows="6" name="comment" ></textarea >
 						<br>
-						<button>
-							Leave a comment
+						<button class="btn btn-primary">
+							Сomment
 						</button>
 					</form>
 				</div>

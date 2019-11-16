@@ -32,8 +32,6 @@ function    passwordValidation(elem){
     if (!inputValidation(elem) || !inputValidation(ps)){
         setErrorText("At less 4 symbols ");
     }
-    console.log(elem.value);
-    console.log(ps.value);
     if (elem.value != ps.value)
         setErrorText("Passwords do not match");
     else

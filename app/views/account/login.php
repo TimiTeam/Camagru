@@ -41,7 +41,7 @@
                             <p></p>
                         </td>
                         <td class="data">
-                            <a href="/camagru/account/register">Don't have account?</a>
+                            <a href="/camagru/account/register">Don't have account?</a><br>
                         </td>
                     </tr>
                     <tr>
@@ -49,7 +49,7 @@
                             <p></p>
                         </td>
                         <td class="data">
-                            <p><br></p>
+                            <p></p>
                         </td>
                     </tr>
                     <tr>
@@ -58,7 +58,7 @@
                         </td>
                         <td class="data">
                             <p>
-                                <button class="simple_button">Sign in </button>
+                                <button class="btn btn-success">Sign in </button>
                             </p>
                         </td>
                     </tr>
