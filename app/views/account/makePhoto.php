@@ -13,7 +13,7 @@ if (!isset($_SESSION['user_in']))
             </div>
             <div ">
                 <p>Title
-                    <input class="title" type="text" id="post_title" name="title" required maxlength="150">><br>
+                    <input class="title" type="text" id="post_title" name="title" required maxlength="150"><br>
                 </p>
                 <p>
                     <img class="img_modal" id="posting_image">
@@ -27,7 +27,6 @@ if (!isset($_SESSION['user_in']))
             </div>
         </div>
     </div>
-    <h2>Make your photo here</h2>
     <div class="cont">
         <div class="masks" id="masks">
             <?php 

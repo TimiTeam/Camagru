@@ -1,11 +1,11 @@
 <?php
     if (isset($_SESSION['user_in'])){
-        $dt = array ('Register' =>'<a href="/camagru/account/makePhoto"><li>Make Photo</li>',
-            'LogIn' => '<a href="/camagru/account/logout"><li>Sign out</li></a>');
+        $dt = array ('Register' =>'<a href="/camagru/account/makePhoto" class="btn btn-outline-primary menu_elem"><li>Make Photo</li>',
+            'LogIn' => '<a href="/camagru/account/logout" class="btn btn-outline-primary menu_elem"><li>Sign out</li></a>');
     }
     else{
-        $dt = array ('Register' =>'<a href="/camagru/account/register"><li>Registration</li>',
-            'LogIn' => '<a href="/camagru/account/login"><li>Sign in</li></a>');
+        $dt = array ('Register' =>'<a href="/camagru/account/register" class="btn btn-outline-primary menu_elem"><li>Registration</li>',
+            'LogIn' => '<a href="/camagru/account/login" class="btn btn-outline-primary menu_elem"><li>Sign in</li></a>');
     }
     ?>
     <!DOCTYPE html>
@@ -28,13 +28,13 @@
     <div class="hor_list">
         <div class="logo_div">
             <a href="/camagru/">
-                <img class="logo" src="/camagru/app/res/camagru.png">
+                <img class="logo" src="/camagru/app/res/bigLogo.png">
             </a>
         </div>
         <ul class="hr">
-            <a href="/camagru/"><li>Main Page </li>
+            <a href="/camagru/" class="btn btn-outline-primary menu_elem"><li>Main Page </li>
             </a>
-            <a href="/camagru/gallery/show"><li>Gallery</li></a>
+            <a href="/camagru/gallery/show" class="btn btn-outline-primary menu_elem"><li>Gallery</li></a>
             <?php
                 foreach($dt as $d)
                     echo $d;
@@ -49,8 +49,9 @@
     <footer>
     <div class="hor_list">
         <ul class="hr">
-            <a href="/camagru/"><li>Main Page </li></a>
-            <a href="/camagru/gallery/show"><li>Gallery</li></a>
+            <a href="/camagru/" class="btn btn-outline-primary menu_elem"><li>Main Page </li>
+            </a>
+            <a href="/camagru/gallery/show" class="btn btn-outline-primary menu_elem"><li>Gallery</li></a>
             <?php
                 foreach($dt as $d)
                     echo $d;

@@ -22,14 +22,14 @@
         <a href="http://localhost:8080/camagru/account/login" class="btn btn-success">Sign in!</a>
         <p>Or if you dont have <b>account</b> <br> Just a click in:</p>
         <a href="http://localhost:8080/camagru/account/register" class="btn btn-success">Create account</a>';
-	} else if ($user)
+	} else if ($user) {
 		echo '<div class="welcome">
                 <p> Hello <b class="user_name">' . $user['first_name'] . ' ' . $user['last_name'] . '</b></p>
              </div>
               <div class="account_settings">
         <br>
             <a href="/camagru/account/settings">
-                <button class="btn btn-secondary">Account Settings</button>
+                <button class="btn btn-primary btn-lg active">Account Settings</button>
             </a>
             </p>
             
@@ -62,9 +62,9 @@
               
               <div id="preview_posts" class="block_preview_posts"><br>';
 
-	if (isset($userLikesPosts)) {
-		foreach ($userLikesPosts as $post) {
-			echo '<div  class="preview_posts">
+		if (isset($userLikesPosts)) {
+			foreach ($userLikesPosts as $post) {
+				echo '<div  class="preview_posts">
                 <div class="preview_img"><a href="/camagru/gallery/showPost?post_id=' . $post[0]['id'] . '">
                     <img class="prev_img" alt="pots" src="/camagru/' . $post[0]['path_photo'] . '">
                 </div>
@@ -78,18 +78,19 @@
                     </p>
                 </div>
               </div>';
+			}
 		}
-	}
-	echo '<br></div><br>
+
+		echo '<br></div><br>
         <p>You can create a new photo with a many different mask and publish it\'s.<br>
         The users can see your photos but only a connected user can like and/or comment your posts.</p>
         <a href="http://localhost:8080/camagru/account/makePhoto" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Make More Photo</a>
         
         <p style="text-align: center">Your posts </p> <br>';
-	if (isset($posts)) {
-		echo '<div class="user_photo">';
-		foreach ($posts as $post) {
-			echo '
+		if (isset($posts)) {
+			echo '<div class="user_photo">';
+			foreach ($posts as $post) {
+				echo '
                 <div class="post_info">
                      <div class="title_date">
                         <div class="left_text">
@@ -115,19 +116,19 @@
                         </div>
                         <div class="like">
                         <div class="users_likes" id="usr_likes' . $post['id'] . '">';
-			foreach ($likes[$post['id']] as $like) {
-				echo '<a href="/camagru/gallery/account?user_id=' . $like['user_id'] . '">' . $like['nickname'] . '</a><br>';
-			}
-			echo '</div> <p>';
-			$tag = '<img class="comment_like" src="/camagru/app/res/';
-			if (searchCurrUserLike($likes[$post['id']])) {
-				$tag .= 'like_like.png" onclick="disLikePost(this, ' . $post['id'] . ');"';
-			} else if (isset($_SESSION['user_id'])) {
-				$tag .= 'like.png" onclick="likeThePost(this, ' . $post['id'] . ');"';
-			} else
-				$tag .= 'like.png"';
-			$tag .= '>';
-			echo $tag . ' <u class="likes" id="likes_' . $post['id'] . '">Like:</u> <b>' . $post['like'] . '</b>
+				foreach ($likes[$post['id']] as $like) {
+					echo '<a href="/camagru/gallery/account?user_id=' . $like['user_id'] . '">' . $like['nickname'] . '</a><br>';
+				}
+				echo '</div> <p>';
+				$tag = '<img class="comment_like" src="/camagru/app/res/';
+				if (searchCurrUserLike($likes[$post['id']])) {
+					$tag .= 'like_like.png" onclick="disLikePost(this, ' . $post['id'] . ');"';
+				} else if (isset($_SESSION['user_id'])) {
+					$tag .= 'like.png" onclick="likeThePost(this, ' . $post['id'] . ');"';
+				} else
+					$tag .= 'like.png"';
+				$tag .= '>';
+				echo $tag . ' <u class="likes" id="likes_' . $post['id'] . '">Like:</u> <b>' . $post['like'] . '</b>
                             </p>
                         </div>
                     </div>
@@ -154,8 +155,9 @@
                         </p>
                     </div>
                 <br>';
+			}
+			echo '</div>';
 		}
-		echo '</div>';
 	}
 	?>
 </div>

@@ -2,6 +2,9 @@
 <div class="main_panel">
 <?php
 
+if (!isset($_SESSION['user_in']))
+	header("Location: http://localhost:8080/camagru/");
+
 function searchCurrUserLike($likesArray){
     if (isset($_SESSION['user_id'])) {
         $currUser = $_SESSION['user_id'];
@@ -14,12 +17,38 @@ function searchCurrUserLike($likesArray){
 }
 
 if(isset($userInfo)){
-    echo '<h3>'.$userInfo['nickname'].'</h3>
-<p>'.$userInfo['first_name']."  ".$userInfo['last_name'].'</p>
-<p>'.$userInfo['email'].'</p>';
+    echo '<div class="welcome">
+                <p class="user_name">'.$userInfo['first_name'].' '.$userInfo['last_name'] . '</p>
+                <p>Send email <a href = "mailto:'.$userInfo['email'].'">'.$userInfo['email'].'</a>
+             </div>
+             <div class="table_info">
+             
+             <p>User info</p>
+             <table class="table table-striped table-dark">
+             <thead>
+                 <tr>
+                     <th scope="col">#</th>
+                     <th scope="col">Count</th>
+                 </tr>
+             </thead>
+             <tbody>
+                 <tr>
+                     <th scope="row">Posts</th>
+                     <td>' . $userInfo['post_count'] . '</td>
+                 </tr>
+                 <tr>
+                     <th scope="row">Likes</th>
+                     <td>' . $userInfo['like_count']  . '</td>
+                 </tr>
+                 <tr>
+                     <th scope="row">Comments</th>
+                     <td>' . $userInfo['comment_count']  . '</td>
+                 </tr>
+             </tbody>
+             </table>
+             <br>
+             </div>';
 }
-
-
 
 if(isset($data) && isset($data[0])){
     echo '<div class="user_photo">';

@@ -45,34 +45,40 @@ class GalleryController extends Controller{
                     echo 'ok';
                 }
                 else
-                    echo 'error';
+                	echo 'error';
             }
             else
-                echo 'error';
-            exit;
+				header("Location: /camagru/gallery/show");
         }
-        echo 'error';
+        echo
+		header("Location: /camagru/gallery/show");
+
+		exit;
     }
 
     public function showPostAction(){
         if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['post_id'])){
 			$post_id = htmlentities($_GET['post_id']);
 			$post = $this->model->getCurrentPost($post_id);
-        	if (isset($_GET['comment'])){
-        		$comment = htmlentities($_GET['comment']);
-        		$this->model->updateCommentToPost($post, $comment);
-				$post = $this->model->getCurrentPost($post_id);
-				$url = explode('&', $_SERVER['REQUEST_URI']);
-				header('Location: http://localhost:8080'.$url[0]);
-				exit;
+			if ($post){
+        		if (isset($_GET['comment'])){
+        			$comment = htmlentities($_GET['comment']);
+        			$this->model->updateCommentToPost($post, $comment);
+					$url = explode('&', $_SERVER['REQUEST_URI']);
+					header('Location: '.$url[0]);
+					exit;
+				}
+            	$comments = [];
+            	$likes = [];
+            	if ($post) {
+					$likes = $this->model->getPostLikes($post['id']);
+					$comments = $this->model->getPostComments($post['id']);
+				}
+
+				$this->view->render("Post", array('post' => $post, 'comments' => $comments, 'likes' => $likes));
 			}
-            $comments = [];
-            $likes = [];
-            if ($post) {
-				$likes = $this->model->getPostLikes($post['id']);
-				$comments = $this->model->getPostComments($post['id']);
-			}
-            $this->view->render("Post", array('post' => $post, 'comments' => $comments, 'likes' => $likes));
+			else
+				header("Location: /camagru/gallery/show");
         }
         exit;
     }
@@ -85,8 +91,16 @@ class GalleryController extends Controller{
                 $posts = $this->model->getAllUserPosts($user['nickname']);
 				$posts = array_reverse($posts);
                 $likes = $this->model->getAllLikes($posts);
-                $this->view->render($user['nickname'], array('userInfo' => $user, 'data' => $posts, 'likes' => $likes));
-            }
+                $user['post_count'] = count($posts);
+				$user['like_count'] = 0;
+				$user['comment_count'] = 0;
+				foreach ($posts as $post){
+					$user['like_count'] += $post['like'];
+					$user['comment_count'] += $post['comments'];
+				}
+				$this->view->render($user['nickname'], array('userInfo' => $user, 'data' => $posts, 'likes' => $likes));
+            }else
+				header("Location: /camagru/gallery/show");
         }
 		exit;
     }

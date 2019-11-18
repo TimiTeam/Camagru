@@ -65,49 +65,40 @@ p {
     display: inline-flex;
     margin-top: 2%;
     border-radius: 10px;
-    background-color: #343a40;
+    background-color: lightgrey;
     margin-bottom: 5%;
 }
 
 .logo_div{
     margin-top: 1%;
-    width: 35%;
+    width: 40%;
 }
 
 .logo{
-    border-radius: 30%;
     width: 100%;
-    padding: 2px;
+    margin: 1%;
 }
 
 .logo:hover{
-    border: 2px double coral;
-    padding: 0px;
+
 }
 
 .hr{
-    padding: 3%;
-    padding-top: 5%;
-    width: 65%;
+    width: 80%;
+    margin-top: 5%;
+    padding-left: 6%;
 }
 ul.hr li {
     display: inline;
+    width: 10%;
+    text-decoration: none;
+}
+
+.menu_elem{
     margin: 1%;
-    width: 5%;
-    background: lightcoral;
-    border: 1px solid salmon;
-    border-radius: 5%;
-    font-size: 120%;
-    font-family: Arial, "Apple Braille", monospace;
-    color: white;
-    padding: 1%;
-    text-shadow: 3px 0px 1px rgba(200,180,180,100);
 }
 
 ul.hr li:hover{
-    background: lemonchiffon;
-    color: red;
-    text-shadow: none;
 }
 a{
     text-decoration: none;
@@ -142,6 +133,7 @@ input{
 .data{
     text-align: left;
     width: 64%;
+    min-width: 200px;
     text-decoration-color: blue;
 }
 
@@ -175,9 +167,8 @@ input{
 .searchBy{
     display: -moz-inline-block;
     width: 100%;
-    margin-top: 1%;
-    padding: 1%;
-    border: 1px solid black;
+    margin-bottom: 1%;
+    text-align: center;
 }
 
 .input_nickname{
@@ -188,11 +179,15 @@ input{
 .select_sort{
     margin-right: 2%;
     display: inline-flex;
+    position: relative;
+    font-family: Arial;
 }
 
 .title_filer{
     display: inline-flex;
+    font-family: "Apple SD Gothic Neo";
     margin-right: 2%;
+    font-size: 110%;
 }
 
 .simple_button:hover{

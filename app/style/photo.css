@@ -10,13 +10,13 @@ body {
 
 .main_panel{
     width: 60%;
-    min-height: 720px;
     margin-left: 20%;
 }
 
 div.cont{
     width: 100%;
-    min-width: 300px;
+    height: auto;
+    min-width: 350px;
     display: inline-flex;
     border: 2px dashed blueviolet;
 }

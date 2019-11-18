@@ -1,10 +1,9 @@
 
 <div class="main_panel">
-    <h2> Gallery</h2>
     <div class="searchBy">
         <form action="" method="get">
             <div class="title_filer">
-                <p>Filter by nickname</p>
+                <p>By nickname</p>
             </div>
             <div class="input_nickname">
                 <input type="text" size="80" name="nickname">
@@ -18,7 +17,7 @@
                     <option value="older">Older</option>
                 </select>
             </div>
-            <button>Search</button>
+            <button class="btn btn-primary">Search</button>
         </form>
     </div>
 <?php
