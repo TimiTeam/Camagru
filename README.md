@@ -11,13 +11,15 @@ This preference set as true by default but can be deactivated in user’s prefer
 
 Gallery
 <img src="gallery.png" alt="Gallery"/>
+
 Searching
 <img src="searching.png" alt="Searching"/>
+
 Comments to Post
 <img src="comments.png" alt="Comments"/>
-Enemy
-<img src="searching.png" alt="room"/>
+
 Making photp
 <img src="webcam.png" alt="Making"/>
+
 Make post
 <img src="postPhoto.png" alt="post"/>
