@@ -164,6 +164,10 @@ input{
     background: #343a40;
 }
 
+.password-form{
+    margin: 1%;
+}
+
 .searchBy{
     display: -moz-inline-block;
     width: 100%;

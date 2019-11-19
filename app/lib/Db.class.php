@@ -7,10 +7,10 @@ class Db{
     protected $db;
 
     public function __construct(){
-        $config = require 'app/config/db.php';
-        try{
-            $this->db = new PDO('mysql:host='.$config['host'].';dbname='.$config['dbname'], $config['user'], $config['pass']);
-        }
+		include('app/config/db.php');
+		try {
+			$this->db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
+		}
         catch (PDOException $e)
         {
             echo "Connection failed: " . $e->getMessage();

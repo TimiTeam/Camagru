@@ -1,6 +1,10 @@
 <?php
 
 return [
+	'' => [
+		'controller' => 'main',
+		'action' => 'index'
+	],
 	'camagru/account/login' => [
 		'controller' => 'account',
 		'action' => 'login'

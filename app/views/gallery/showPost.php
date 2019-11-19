@@ -70,7 +70,7 @@ echo '<div class="user_photo">
 				<div class="leave_comment">
 					<form action="#" method="get">
 						<input type="hidden" name="post_id" value="'.$post['id'].'">
-						<textarea rows="6" name="comment" ></textarea >
+						<textarea rows="6" name="comment" maxlength="200" ></textarea >
 						<br>
 						<button class="btn btn-primary">
 							Сomment

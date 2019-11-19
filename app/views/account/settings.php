@@ -44,19 +44,21 @@ else if($notify == 1)
         </p>
         <p>Notify me by email about commenting my post<br>
     	<?php echo $notify_input ?></p>
-        <input type="button" value="Change password" onclick="changePassword(this);">
+        <br>
+        <input type="button" class="btn btn-secondary" value="Change password" onclick="changePassword(this);">
+        <br>
         <div id="pas_div" style="display: none">
         <p>
             <p id="error_info" style="color:red;"></p>
             Current password<br>
-            <input type="password" id ="cur_pass" name="pass" ></p>
-            <input type="button" value="Next" onclick="validCurrentPassword();">
+            <input  class="password-form" type="password" id ="cur_pass" name="pass" ></p>
+            <input  class="btn btn-primary" type="button" value="Next" onclick="validCurrentPassword();">
 
             <div id="new_pas_div" style="display: none">
                 <p>New password<br>
-                    <input type="password" id ="new_pass" name="password"><br>
+                    <input class="password-form" type="password" id ="new_pass" name="password"><br>
                     Confirm password<br>
-                    <input type="password" id ="conf_pass" name="conf_pass" onkeyup="confirmPass(this);">
+                    <input class="password-form" type="password" id ="conf_pass" name="conf_pass" onkeyup="confirmPass(this);">
                 </p>
             </div>
         </div>
